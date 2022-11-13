@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const Widget hSpaceTiny = SizedBox(width: 5.0);
 const Widget hSpaceSmall = SizedBox(width: 10.0);
@@ -40,6 +41,23 @@ AppBar noTitleAppBar({bool isLight = true, bool leading = true}) {
     elevation: 0,
     // ignore: deprecated_member_use
     brightness: isLight ? Brightness.light : Brightness.dark,
+  );
+}
+
+showInfoMessage({required message, title}) {
+  Get.snackbar(
+    title,
+    message,
+    backgroundColor: title == "Info" ? Colors.green : Colors.red,
+    colorText: Colors.white,
+    shouldIconPulse: true,
+    snackPosition: SnackPosition.TOP,
+    animationDuration: const Duration(microseconds: 25),
+    icon: const Icon(
+      Icons.cancel,
+      size: 18,
+      color: Colors.white,
+    ),
   );
 }
 

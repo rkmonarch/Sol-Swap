@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phantom_demo/components/screens/contacts_list.dart';
 import 'package:flutter_phantom_demo/components/screens/screens.dart';
+import 'package:flutter_phantom_demo/main.dart';
 import 'package:flutter_phantom_demo/providers/screen_provider.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,7 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     const solname = 'jhondoe.sol';
     var walletAddrs = phantomConnectInstance.userPublicKey;
+    List contacts = storage.read("contacts");
 
     return Drawer(
       child: Material(
@@ -36,33 +39,43 @@ class Sidebar extends StatelessWidget {
                         selectedItem(context, 0, phantomConnectInstance),
                   ),
                   const SizedBox(height: 16),
-                  buildSideBarButton(
-                    text: 'Sign Message',
-                    icon: Icons.message,
-                    onClicked: () =>
-                        selectedItem(context, 1, phantomConnectInstance),
+                  Visibility(
+                    visible: contacts.isNotEmpty,
+                    child: buildSideBarButton(
+                        text: 'My Contacts',
+                        icon: Icons.contact_mail,
+                        onClicked: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ContactsListScreen()))),
                   ),
-                  const SizedBox(height: 16),
-                  buildSideBarButton(
-                    text: 'Sign and Send Transaction',
-                    icon: Icons.send_and_archive,
-                    onClicked: () =>
-                        selectedItem(context, 2, phantomConnectInstance),
-                  ),
-                  const SizedBox(height: 16),
-                  buildSideBarButton(
-                    text: 'Sign Transaction',
-                    icon: Icons.edit,
-                    onClicked: () =>
-                        selectedItem(context, 3, phantomConnectInstance),
-                  ),
-                  const SizedBox(height: 16),
-                  buildSideBarButton(
-                    text: 'Disconnect',
-                    icon: Icons.link_off,
-                    onClicked: () =>
-                        selectedItem(context, 4, phantomConnectInstance),
-                  ),
+                  // buildSideBarButton(
+                  //   text: 'Sign Message',
+                  //   icon: Icons.message,
+                  //   onClicked: () =>
+                  //       selectedItem(context, 1, phantomConnectInstance),
+                  // ),
+                  // const SizedBox(height: 16),
+                  // buildSideBarButton(
+                  //   text: 'Sign and Send Transaction',
+                  //   icon: Icons.send_and_archive,
+                  //   onClicked: () =>
+                  //       selectedItem(context, 2, phantomConnectInstance),
+                  // ),
+                  // const SizedBox(height: 16),
+                  // buildSideBarButton(
+                  //   text: 'Sign Transaction',
+                  //   icon: Icons.edit,
+                  //   onClicked: () =>
+                  //       selectedItem(context, 3, phantomConnectInstance),
+                  // ),
+                  // const SizedBox(height: 16),
+                  // buildSideBarButton(
+                  //   text: 'Disconnect',
+                  //   icon: Icons.link_off,
+                  //   onClicked: () =>
+                  //       selectedItem(context, 4, phantomConnectInstance),
+                  // ),
                   const SizedBox(height: 24),
                   const Divider(color: Colors.white70),
                   const SizedBox(height: 24),
@@ -191,7 +204,7 @@ class _buildSocialWidgets extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () => launchUrl(
-            Uri.parse('https://twitter.com/strawhatxyz'),
+            Uri.parse('https://twitter.com/0xrahulk'),
             mode: LaunchMode.externalApplication,
           ),
         ),
@@ -201,7 +214,7 @@ class _buildSocialWidgets extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () => launchUrl(
-            Uri.parse('https://github.com/Strawhatxyz/'),
+            Uri.parse('https://github.com/rkmonarch/'),
             mode: LaunchMode.externalApplication,
           ),
         ),
@@ -221,7 +234,7 @@ class _buildSocialWidgets extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () => launchUrl(
-            Uri.parse('mailto:hello@strawhat.xyz'),
+            Uri.parse('mailto:rkweb3.00@gmail.com'),
             mode: LaunchMode.externalApplication,
           ),
         ),

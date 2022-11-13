@@ -5,9 +5,15 @@ import 'package:flutter_phantom_demo/providers/screen_provider.dart';
 import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
 import 'package:flutter_phantom_demo/repository/account_repo.dart';
 import 'package:flutter_phantom_demo/views/home.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+final storage = GetStorage();
+
+void main() async{
+  await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
@@ -29,7 +35,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => AccountBloc(accountRepo: AccountIMPL()))
         ],
-        child: MaterialApp(
+        child: GetMaterialApp(
           title: 'Phantom Dart Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
