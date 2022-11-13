@@ -10,38 +10,22 @@ abstract class AccountRepo {
 class AccountIMPL extends AccountRepo {
   @override
   Future<BalanceResponse> getBalance({required String pubKey}) async {
-    var data = {
+    var data = json.encode({
       "jsonrpc": "2.0",
       "id": 1,
       "method": "getBalance",
-      "params": [pubKey]
-    };
+      "params": [
+        pubKey,
+      ]
+    });
     final response = await http.post(Uri.parse("https://api.devnet.solana.com"),
         headers: {'Content-Type': 'application/json'}, body: data);
+    print(">>>>>>>>>>>>>>>>${response.statusCode}");
+    print(">>>>>>>>>>>>>>>>${data}");
+    print(">>>>>>>>>>>>>>>>${response.body}");
     if (response.statusCode == 200) {
       return BalanceResponse.fromJson(jsonDecode(response.body));
     }
     throw UnimplementedError();
   }
-}
-
-Future<BalanceResponse> getBalance({required String pubKey}) async {
-  var data = json.encode({
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "getAccountInfo",
-    "params": [
-      pubKey,
-      {"encoding": "jsonParsed"}
-    ]
-  });
-  final response = await http.post(Uri.parse("https://api.devnet.solana.com"),
-      headers: {'Content-Type': 'application/json'}, body: data);
-  print(">>>>>>>>>>>>>>>>${response.statusCode}");
-  print(">>>>>>>>>>>>>>>>${data}");
-  print(">>>>>>>>>>>>>>>>${response.body}");
-  if (response.statusCode == 200) {
-    return BalanceResponse.fromJson(jsonDecode(response.body));
-  }
-  throw UnimplementedError();
 }

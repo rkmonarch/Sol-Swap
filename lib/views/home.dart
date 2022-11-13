@@ -8,6 +8,7 @@ import 'package:flutter_phantom_demo/components/screens/sign_transaction/send_tr
 import 'package:flutter_phantom_demo/components/screens/transaction_status.dart';
 import 'package:flutter_phantom_demo/components/sidebar/sidebar.dart';
 import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
+import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
 import 'package:flutter_phantom_demo/utils/logger.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
@@ -124,10 +125,7 @@ class _HomeState extends State<Home> {
     final provider = Provider.of<WalletStateProvider>(context, listen: true);
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Welcome to Flutter Demo App"),
-      ),
+      appBar: provider.isConnected ? AppBar() : null,
       drawer: provider.isConnected
           ? Sidebar(phantomConnectInstance: phantomConnectInstance)
           : null,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
 import 'package:flutter_phantom_demo/providers/screen_provider.dart';
 import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
+import 'package:flutter_phantom_demo/repository/account_repo.dart';
 import 'package:flutter_phantom_demo/views/home.dart';
 import 'package:provider/provider.dart';
 
@@ -21,13 +24,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Phantom Dart Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => AccountBloc(accountRepo: AccountIMPL()))
+        ],
+        child: MaterialApp(
+          title: 'Phantom Dart Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.black,
+          ),
+          home: const Home(),
+        ));
   }
 }

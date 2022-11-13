@@ -59,6 +59,7 @@ class _TransactionStatusState extends State<TransactionStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text('Signature Status'),
         centerTitle: true,
       ),

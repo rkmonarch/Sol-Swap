@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phantom_demo/resources/app_assets.dart';
+import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
 import 'package:flutter_phantom_demo/utils/logger.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,29 +29,47 @@ class _NotConnectedState extends State<NotConnected> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10.0),
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Colors.black,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'Flutter Solana \n Phantom Demo',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            vSpaceLarge,
+            Text(
+              "Get better\nwith Solana.",
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
             ),
-          ),
-          ElevatedButton.icon(
-            onPressed: connectWallet,
-            label: const Text("Connect Wallet"),
-            icon: const Icon(Icons.link),
-            style: ElevatedButton.styleFrom(
-              elevation: 4,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CircleAvatar(
+                  radius: 100,
+                  backgroundImage: AssetImage('assets/solana2.png'),
+                ),
+              ],
             ),
-          )
-        ],
+            vSpaceMassive,
+            vSpaceMassive,
+            vSpaceMedium,
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: connectWallet,
+                label: const Text("Connect Wallet"),
+                icon: const Icon(Icons.link),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(500, 50),
+                  elevation: 4,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

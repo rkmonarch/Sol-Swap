@@ -63,25 +63,31 @@ class _SignAndSendTransactionScreenState
     final walletState =
         Provider.of<WalletStateProvider>(context, listen: false);
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-          child: Column(
-        children: [
-          styledTextFeild(walletAddressController, "User Wallet Address",
-              "Enter User wallet Address", Icons.wallet),
-          const SizedBox(height: 10),
-          styledTextFeild(solAmountController, "1 SOL = 1,000,000,000 LAMPORTS",
-              "Enter amount to send in SOL", Icons.circle_outlined),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              signAndSendTransaction(walletState);
-            },
-            child: const Text("Sign and Send"),
-          )
-        ],
-      )),
+    return Container(
+      color: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            styledTextFeild(walletAddressController, "User Wallet Address",
+                "Enter User wallet Address", Icons.wallet),
+            const SizedBox(height: 10),
+            styledTextFeild(
+                solAmountController,
+                "1 SOL = 1,000,000,000 LAMPORTS",
+                "Enter amount to send in SOL",
+                Icons.circle_outlined),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                signAndSendTransaction(walletState);
+              },
+              child: const Text("Sign and Send"),
+            )
+          ],
+        )),
+      ),
     );
   }
 }

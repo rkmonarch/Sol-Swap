@@ -16,15 +16,13 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     const solname = 'jhondoe.sol';
     var walletAddrs = phantomConnectInstance.userPublicKey;
-    const urlImage = "https://picsum.photos/200/300";
 
     return Drawer(
       child: Material(
-        color: const Color.fromRGBO(50, 75, 205, 1),
+        color: Colors.black87,
         child: ListView(
           children: <Widget>[
-            buildHeader(
-                urlImage: urlImage, name: solname, walletAddress: walletAddrs),
+            buildHeader(name: solname, walletAddress: walletAddrs),
             const Divider(color: Colors.white70),
             Container(
               padding: padding,
@@ -79,7 +77,6 @@ class Sidebar extends StatelessWidget {
   }
 
   Widget buildHeader({
-    required String urlImage,
     required String name,
     required String walletAddress,
   }) =>
@@ -88,7 +85,6 @@ class Sidebar extends StatelessWidget {
           padding: padding.add(const EdgeInsets.symmetric(vertical: 40)),
           child: Row(
             children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
               const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
