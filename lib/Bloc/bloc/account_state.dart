@@ -11,3 +11,8 @@ class balanceSuccess extends AccountState {
   final BalanceResponse model;
   balanceSuccess({required this.model});
 }
+
+
+class LargestAccuntLoading extends AccountState{}
+
+class LargestAccountSuccess extends AccountState{}
