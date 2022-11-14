@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
 import 'package:flutter_phantom_demo/components/screens/create_contact.dart';
+import 'package:flutter_phantom_demo/components/screens/largest_accounts_screen.dart';
 import 'package:flutter_phantom_demo/components/screens/screens.dart';
 import 'package:flutter_phantom_demo/components/screens/sign_and_send_transaction/sign_and_send_tx.dart';
 import 'package:flutter_phantom_demo/components/screens/sign_in_message/sign_in_message.dart';
@@ -127,7 +128,7 @@ class _ConnectedState extends State<Connected> {
                                     context,
                                     MaterialPageRoute(
                                         builder: ((context) =>
-                                            CreateContactScreen())));
+                                            LargestAccountScreen())));
                               },
                               label: const Text("Connect Wallet"),
                               icon: const Icon(Icons.link),

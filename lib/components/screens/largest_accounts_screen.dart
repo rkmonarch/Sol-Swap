@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
+import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
+import 'package:solana/solana.dart';
 
 class LargestAccountScreen extends StatefulWidget {
   const LargestAccountScreen({super.key});
@@ -11,14 +13,67 @@ class LargestAccountScreen extends StatefulWidget {
 
 class _LargestAccountScreenState extends State<LargestAccountScreen> {
   @override
+  void initState() {
+    BlocProvider.of<AccountBloc>(context).add(getLargestAccountEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text("Largest Holding Accounts"),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [],
+          child: BlocBuilder<AccountBloc, AccountState>(
+            builder: (context, state) {
+              if (state is LargestAccuntLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is LargestAccountSuccess) {
+                // BlocProvider.of<AccountBloc>(context).add(TotalSupplyEvent());
+                var data = state.model.result?.value;
+                return ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: data?.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          vSpaceMedium,
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: (data!.elementAt(index).lamports! /
+                                            lamportsPerSol)
+                                        .toString()
+                                        .substring(0, 7),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                                TextSpan(
+                                    text: ' Sol',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                                TextSpan(text: ' world!'),
+                              ],
+                            ),
+                          ),
+                          vSpaceTiny,
+                          Text((data.elementAt(index).address).toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12)),
+                        ],
+                      );
+                    });
+              }
+              return Container();
+            },
           ),
         ),
       ),

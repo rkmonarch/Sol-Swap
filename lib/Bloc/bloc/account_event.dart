@@ -8,5 +8,6 @@ class getBalanceEvent extends AccountEvent {
   getBalanceEvent({required this.pubkey});
 }
 
+class getLargestAccountEvent extends AccountEvent {}
 
-class getLargestAccountEvent extends AccountEvent{}
+class TotalSupplyEvent extends AccountEvent {}

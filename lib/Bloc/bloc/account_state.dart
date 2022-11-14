@@ -12,7 +12,16 @@ class balanceSuccess extends AccountState {
   balanceSuccess({required this.model});
 }
 
+class LargestAccuntLoading extends AccountState {}
 
-class LargestAccuntLoading extends AccountState{}
+class LargestAccountSuccess extends AccountState {
+  final largetsAccountResponse model;
+  LargestAccountSuccess({required this.model});
+}
 
-class LargestAccountSuccess extends AccountState{}
+class totalSupplyLoading extends AccountState {}
+
+class TotalSupplySuccess extends AccountState {
+  final TotalSupplyResponse model;
+  TotalSupplySuccess({required this.model});
+}
