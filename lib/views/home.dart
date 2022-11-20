@@ -57,16 +57,17 @@ class _HomeState extends State<Home> {
             case '/connected':
               if (phantomConnectInstance.createSession(params)) {
                 provider.updateConnection(true);
-                _showSnackBar(context, "Connected to Wallet", "success");
+                showInfoMessage(message: "Wallet Connected", title: "Info");
               } else {
-                _showSnackBar(context, "Error connecting to Wallet", "error");
+                showInfoMessage(
+                    message: "Error connecting to the wallet", title: "Error");
               }
               break;
             case '/disconnect':
               setState(() {
                 provider.updateConnection(false);
               });
-              _showSnackBar(context, "Wallet Disconnected", "success");
+              showInfoMessage(message: "Wallet Disconnected", title: "Info");
               break;
             case '/signAndSendTransaction':
               var data = phantomConnectInstance.decryptPayload(
@@ -107,7 +108,7 @@ class _HomeState extends State<Home> {
               break;
             default:
               logger.i('unknown');
-              _showSnackBar(context, "Unknown Redirect", "error");
+              showInfoMessage(message: "Unknown redirect", title: "Error");
           }
         }
       }, onError: (err) {
@@ -125,7 +126,12 @@ class _HomeState extends State<Home> {
     final provider = Provider.of<WalletStateProvider>(context, listen: true);
 
     return Scaffold(
-      appBar: provider.isConnected ? AppBar() : null,
+      appBar: provider.isConnected
+          ? AppBar(
+              title: Text("Sol Swap"),
+              centerTitle: true,
+            )
+          : null,
       drawer: provider.isConnected
           ? Sidebar(phantomConnectInstance: phantomConnectInstance)
           : null,

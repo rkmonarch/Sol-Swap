@@ -1,1 +1,1 @@
-enum Screens { home, send, message, sign }
+enum Screens { home, send, message, sign, contacts }

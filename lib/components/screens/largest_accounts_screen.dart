@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
+import 'package:flutter_phantom_demo/Bloc/Accounts/account_bloc.dart';
 import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
 import 'package:solana/solana.dart';
 
@@ -14,7 +14,7 @@ class LargestAccountScreen extends StatefulWidget {
 class _LargestAccountScreenState extends State<LargestAccountScreen> {
   @override
   void initState() {
-    BlocProvider.of<AccountBloc>(context).add(getLargestAccountEvent());
+    BlocProvider.of<AccountBloc>(context).add(TotalSupplyEvent());
     super.initState();
   }
 
@@ -71,6 +71,12 @@ class _LargestAccountScreenState extends State<LargestAccountScreen> {
                         ],
                       );
                     });
+              } else if (state is TotalSupplySuccess) {
+                return Container(
+                  child: Text(
+                      state.model.result?.value?.circulating.toString() ?? "",
+                      style: TextStyle(color: Colors.white, fontSize: 12)),
+                );
               }
               return Container();
             },

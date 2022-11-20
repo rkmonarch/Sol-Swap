@@ -6,7 +6,6 @@ import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//https://github.com/ilap/pinenacl-dart/blob/master/example/signature.dart
 
 class SignInMessageScreen extends StatefulWidget {
   final PhantomConnect phantomConnectInstance;

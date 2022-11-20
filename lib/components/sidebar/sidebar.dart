@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/components/screens/contacts_list.dart';
 import 'package:flutter_phantom_demo/components/screens/screens.dart';
 import 'package:flutter_phantom_demo/main.dart';
 import 'package:flutter_phantom_demo/providers/screen_provider.dart';
@@ -16,7 +15,6 @@ class Sidebar extends StatelessWidget {
   const Sidebar({super.key, required this.phantomConnectInstance});
   @override
   Widget build(BuildContext context) {
-    const solname = 'jhondoe.sol';
     var walletAddrs = phantomConnectInstance.userPublicKey;
     List contacts = storage.read("contacts");
 
@@ -25,7 +23,7 @@ class Sidebar extends StatelessWidget {
         color: Colors.black87,
         child: ListView(
           children: <Widget>[
-            buildHeader(name: solname, walletAddress: walletAddrs),
+            buildHeader(walletAddress: walletAddrs),
             const Divider(color: Colors.white70),
             Container(
               padding: padding,
@@ -44,38 +42,36 @@ class Sidebar extends StatelessWidget {
                     child: buildSideBarButton(
                         text: 'My Contacts',
                         icon: Icons.contact_mail,
-                        onClicked: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ContactsListScreen()))),
+                        onClicked: () =>  selectedItem(context, 5, phantomConnectInstance),),
                   ),
-                  // buildSideBarButton(
-                  //   text: 'Sign Message',
-                  //   icon: Icons.message,
-                  //   onClicked: () =>
-                  //       selectedItem(context, 1, phantomConnectInstance),
-                  // ),
-                  // const SizedBox(height: 16),
-                  // buildSideBarButton(
-                  //   text: 'Sign and Send Transaction',
-                  //   icon: Icons.send_and_archive,
-                  //   onClicked: () =>
-                  //       selectedItem(context, 2, phantomConnectInstance),
-                  // ),
-                  // const SizedBox(height: 16),
-                  // buildSideBarButton(
-                  //   text: 'Sign Transaction',
-                  //   icon: Icons.edit,
-                  //   onClicked: () =>
-                  //       selectedItem(context, 3, phantomConnectInstance),
-                  // ),
-                  // const SizedBox(height: 16),
-                  // buildSideBarButton(
-                  //   text: 'Disconnect',
-                  //   icon: Icons.link_off,
-                  //   onClicked: () =>
-                  //       selectedItem(context, 4, phantomConnectInstance),
-                  // ),
+                  const SizedBox(height: 16),
+                  buildSideBarButton(
+                    text: 'Sign Message',
+                    icon: Icons.message,
+                    onClicked: () =>
+                        selectedItem(context, 1, phantomConnectInstance),
+                  ),
+                  const SizedBox(height: 16),
+                  buildSideBarButton(
+                    text: 'Sign and Send Transaction',
+                    icon: Icons.send_and_archive,
+                    onClicked: () =>
+                        selectedItem(context, 2, phantomConnectInstance),
+                  ),
+                  const SizedBox(height: 16),
+                  buildSideBarButton(
+                    text: 'Sign Transaction',
+                    icon: Icons.edit,
+                    onClicked: () =>
+                        selectedItem(context, 3, phantomConnectInstance),
+                  ),
+                  const SizedBox(height: 16),
+                  buildSideBarButton(
+                    text: 'Disconnect',
+                    icon: Icons.link_off,
+                    onClicked: () =>
+                        selectedItem(context, 4, phantomConnectInstance),
+                  ),
                   const SizedBox(height: 24),
                   const Divider(color: Colors.white70),
                   const SizedBox(height: 24),
@@ -90,7 +86,6 @@ class Sidebar extends StatelessWidget {
   }
 
   Widget buildHeader({
-    required String name,
     required String walletAddress,
   }) =>
       InkWell(
@@ -102,10 +97,6 @@ class Sidebar extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                  ),
                   const SizedBox(height: 4),
                   Text(
                     toShortAddres(address: walletAddress),
@@ -180,6 +171,9 @@ class Sidebar extends StatelessWidget {
         Uri url = phantomConnectInstance.generateDisconnectUri(
             redirect: "/disconnect");
         await launchUrl(url, mode: LaunchMode.externalApplication);
+        break;
+      case 5:
+        context.read<ScreenProvider>().changeScreen(Screens.contacts);
         break;
       default:
         context.read<ScreenProvider>().changeScreen(Screens.home);

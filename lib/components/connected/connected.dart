@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
+import 'package:flutter_phantom_demo/Bloc/Accounts/account_bloc.dart';
 import 'package:flutter_phantom_demo/components/screens/create_contact.dart';
-import 'package:flutter_phantom_demo/components/screens/largest_accounts_screen.dart';
 import 'package:flutter_phantom_demo/components/screens/screens.dart';
 import 'package:flutter_phantom_demo/components/screens/sign_and_send_transaction/sign_and_send_tx.dart';
 import 'package:flutter_phantom_demo/components/screens/sign_in_message/sign_in_message.dart';
@@ -89,6 +88,8 @@ class _ConnectedState extends State<Connected> {
       case Screens.sign:
         return SignTransactionScreen(
             phantomConnectInstance: widget.phantomConnectInstance);
+      case Screens.contacts:
+        return CreateContactScreen();
       default:
         return Center(
           child: Column(
@@ -96,18 +97,36 @@ class _ConnectedState extends State<Connected> {
               BlocBuilder<AccountBloc, AccountState>(
                 builder: (context, state) {
                   if (state is balanceLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 50),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                       ),
                     );
                   } else if (state is balanceSuccess) {
-                    var amount = state.model.result!.value!;
+                    var amount = state.model.result!.value!.lamports;
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          vSpaceMedium,
+                          Text(
+                            "Account Information",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          vSpaceSmall,
+                          Container(
+                            child: Text(
+                              widget.phantomConnectInstance.userPublicKey,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ),
+                          vSpaceMedium,
                           vSpaceMedium,
                           Text(
                             "Total Balance",
@@ -115,30 +134,44 @@ class _ConnectedState extends State<Connected> {
                           ),
                           Container(
                             child: Text(
-                              (amount / lamportsPerSol).toString(),
+                              (amount! / lamportsPerSol)
+                                      .toString()
+                                      .substring(0, 6) +
+                                  " Sol",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 40),
                             ),
                           ),
                           vSpaceMedium,
-                          Center(
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            LargestAccountScreen())));
-                              },
-                              label: const Text("Connect Wallet"),
-                              icon: const Icon(Icons.link),
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(500, 50),
-                                elevation: 4,
-                              ),
+                          Text(
+                            "rentEpoch",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          vSpaceSmall,
+                          Text(
+                              "(It is fee for the resource consumption on network.)",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          Container(
+                            child: Text(
+                              state.model.result!.value!.rentEpoch.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 40),
                             ),
                           ),
-                          vSpaceMassive,
+                          vSpaceMedium,
+                          Text(
+                            "Executable",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          Container(
+                            child: Text(
+                              state.model.result!.value!.executable.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 40),
+                            ),
+                          ),
+                          vSpaceMedium,
                         ],
                       ),
                     );

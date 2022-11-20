@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phantom_demo/Bloc/bloc/account_bloc.dart';
+import 'package:flutter_phantom_demo/Bloc/Accounts/account_bloc.dart';
 import 'package:flutter_phantom_demo/providers/screen_provider.dart';
 import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
 import 'package:flutter_phantom_demo/repository/account_repo.dart';

@@ -65,11 +65,21 @@ class _SignTransactionScreenState extends State<SignTransactionScreen> {
       child: SingleChildScrollView(
           child: Column(
         children: [
-          styledTextFeild(walletAddressController, "User Wallet Address",
-              "Enter User wallet Address", Icons.wallet),
+          styledTextFeild(
+              walletAddressController,
+              "User Wallet Address",
+              TextInputType.number,
+              false,
+              "Enter User wallet Address",
+              Icons.wallet),
           const SizedBox(height: 10),
-          styledTextFeild(solAmountController, "1 SOL = 1,000,000,000 LAMPORTS",
-              "Enter amount to send in SOL", Icons.circle_outlined),
+          styledTextFeild(
+              solAmountController,
+              "1 SOL = 1,000,000,000 LAMPORTS",
+              TextInputType.number,
+              false,
+              "Enter amount to send in SOL",
+              Icons.circle_outlined),
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {

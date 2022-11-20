@@ -90,7 +90,7 @@ class _TransactionStatusState extends State<TransactionStatus> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                    },
+                  },
                     child: const Text("Go Back"),
                   ),
                 ],

@@ -17,7 +17,7 @@ class AccountIMPL extends AccountRepo {
     var data = json.encode({
       "jsonrpc": "2.0",
       "id": 1,
-      "method": "getBalance",
+      "method": "getAccountInfo",
       "params": [
         pubKey,
       ]

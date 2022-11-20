@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/components/screens/contacts_list.dart';
 import 'package:flutter_phantom_demo/main.dart';
+import 'package:flutter_phantom_demo/resources/app_assets.dart';
 import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
 
 class CreateContactScreen extends StatefulWidget {
-  const CreateContactScreen({super.key});
+  CreateContactScreen({super.key});
 
   @override
   State<CreateContactScreen> createState() => _CreateContactScreenState();
@@ -17,10 +17,50 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
   final _formkey = GlobalKey<FormState>();
   List contacts = [];
   @override
+  void initState() {
+    var contact = storage.read("contacts");
+    print("before contact is $contact");
+    contacts.add(contact);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Create Contact"),
+        centerTitle: true,
+      ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+          icon: Center(
+            child: ElevatedButton(
+              onPressed: () {
+                if (pubkeyController.text.length > 1 &&
+                    nameController.text.isNotEmpty) {
+                  contactsGloble.add({
+                    "address": pubkeyController.text.trim(),
+                    "name": nameController.text.trim()
+                  });
+                  showInfoMessage(
+                      message: "Contact Added Successfully", title: "Info");
+                  Navigator.pop(context);
+                } else {
+                  showInfoMessage(
+                      message: "Please submit required fields", title: "Error");
+                }
+              },
+              child: Text("Save Wallet Contact"),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(500, 50),
+                elevation: 4,
+              ),
+            ),
+          ),
+        ),
+      ]),
       key: _scaffoldKey,
-      appBar: AppBar(),
       backgroundColor: Colors.black,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -87,37 +127,6 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
                         fontWeight: FontWeight.normal),
                   )),
               vSpaceLarge,
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (pubkeyController.text.isNotEmpty &&
-                        nameController.text.isNotEmpty) {
-                      contacts.add({
-                        "address": pubkeyController.text.trim(),
-                        "name": nameController.text.trim()
-                      });
-                      storage.write("contacts", contacts);
-                      var contactslist = storage.read("contacts");
-                      print("contacts is $contactslist");
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactsListScreen()));
-                      showInfoMessage(
-                          message: "Contact Added Successfully", title: "Info");
-                    } else {
-                      showInfoMessage(
-                          message: "Please submit required fields",
-                          title: "Error");
-                    }
-                  },
-                  child: Text("Save Wallet Contact"),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(500, 50),
-                    elevation: 4,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
