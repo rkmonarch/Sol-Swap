@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/components/screens/screens.dart';
-import 'package:flutter_phantom_demo/main.dart';
-import 'package:flutter_phantom_demo/providers/screen_provider.dart';
+import 'package:Sol_Swap/components/screens/screens.dart';
+import 'package:Sol_Swap/main.dart';
+import 'package:Sol_Swap/providers/screen_provider.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -40,9 +40,11 @@ class Sidebar extends StatelessWidget {
                   Visibility(
                     visible: contacts.isNotEmpty,
                     child: buildSideBarButton(
-                        text: 'My Contacts',
-                        icon: Icons.contact_mail,
-                        onClicked: () =>  selectedItem(context, 5, phantomConnectInstance),),
+                      text: 'My Contacts',
+                      icon: Icons.contact_mail,
+                      onClicked: () =>
+                          selectedItem(context, 5, phantomConnectInstance),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   buildSideBarButton(
@@ -214,11 +216,11 @@ class _buildSocialWidgets extends StatelessWidget {
         ),
         IconButton(
           icon: const FaIcon(
-            FontAwesomeIcons.globe,
+            FontAwesomeIcons.linkedinIn,
             color: Colors.white,
           ),
           onPressed: () => launchUrl(
-            Uri.parse('https://strawhat.xyz'),
+            Uri.parse('https://www.linkedin.com/in/rahul-kulkarni-398738218/'),
             mode: LaunchMode.externalApplication,
           ),
         ),

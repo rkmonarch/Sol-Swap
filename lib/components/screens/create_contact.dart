@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/main.dart';
-import 'package:flutter_phantom_demo/resources/app_assets.dart';
-import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
+import 'package:Sol_Swap/main.dart';
+import 'package:Sol_Swap/resources/app_assets.dart';
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 
 class CreateContactScreen extends StatefulWidget {
   CreateContactScreen({super.key});

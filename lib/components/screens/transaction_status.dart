@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/utils/helpers.dart';
-import 'package:flutter_phantom_demo/utils/logger.dart';
+import 'package:Sol_Swap/utils/helpers.dart';
+import 'package:Sol_Swap/utils/logger.dart';
 import 'package:solana/dto.dart';
 import 'package:solana/solana.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -90,7 +90,7 @@ class _TransactionStatusState extends State<TransactionStatus> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                  },
+                    },
                     child: const Text("Go Back"),
                   ),
                 ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/components/styled_text_feild.dart';
-import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
+import 'package:Sol_Swap/components/styled_text_feild.dart';
+import 'package:Sol_Swap/providers/wallet_state_provider.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
 import 'package:solana/encoder.dart';

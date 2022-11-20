@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
-import 'package:flutter_phantom_demo/utils/logger.dart';
+import 'package:Sol_Swap/providers/wallet_state_provider.dart';
+import 'package:Sol_Swap/utils/logger.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
 

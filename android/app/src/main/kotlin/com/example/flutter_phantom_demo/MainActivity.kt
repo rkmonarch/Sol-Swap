@@ -1,4 +1,4 @@
-package com.example.flutter_phantom_demo
+package com.example.Sol_Swap
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:bs58/bs58.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/components/screens/transaction_status.dart';
-import 'package:flutter_phantom_demo/utils/logger.dart';
+import 'package:Sol_Swap/components/screens/transaction_status.dart';
+import 'package:Sol_Swap/utils/logger.dart';
 import 'package:solana/solana.dart';
 
 class SendTxScreen extends StatefulWidget {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_phantom_demo/components/screens/create_contact.dart';
-import 'package:flutter_phantom_demo/components/styled_text_feild.dart';
-import 'package:flutter_phantom_demo/providers/wallet_state_provider.dart';
-import 'package:flutter_phantom_demo/resources/app_assets.dart';
-import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
+import 'package:Sol_Swap/components/screens/create_contact.dart';
+import 'package:Sol_Swap/components/styled_text_feild.dart';
+import 'package:Sol_Swap/providers/wallet_state_provider.dart';
+import 'package:Sol_Swap/resources/app_assets.dart';
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
 import 'package:solana/encoder.dart';
@@ -164,7 +163,7 @@ class _SignAndSendTransactionScreenState
                                                 styledTextFeild(
                                                     solAmountController,
                                                     "1 SOL = 1,000,000,000 LAMPORTS",
-                                                     TextInputType.number,
+                                                    TextInputType.number,
                                                     false,
                                                     "Enter amount to send in SOL",
                                                     Icons.circle_outlined),

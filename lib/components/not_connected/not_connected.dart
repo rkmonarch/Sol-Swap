@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phantom_demo/resources/app_assets.dart';
-import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
-import 'package:flutter_phantom_demo/utils/logger.dart';
+import 'package:Sol_Swap/resources/ui_helpers.dart';
+import 'package:Sol_Swap/utils/logger.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:url_launcher/url_launcher.dart';
 

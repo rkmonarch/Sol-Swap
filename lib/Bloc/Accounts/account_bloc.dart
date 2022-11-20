@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_phantom_demo/models/balance_response.dart';
-import 'package:flutter_phantom_demo/models/largest_account_response.dart';
-import 'package:flutter_phantom_demo/models/total_supply_response.dart';
-import 'package:flutter_phantom_demo/repository/account_repo.dart';
+import 'package:Sol_Swap/models/balance_response.dart';
+import 'package:Sol_Swap/models/largest_account_response.dart';
+import 'package:Sol_Swap/models/total_supply_response.dart';
+import 'package:Sol_Swap/repository/account_repo.dart';
 import 'package:meta/meta.dart';
 part 'account_event.dart';
 part 'account_state.dart';

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_phantom_demo/models/balance_response.dart';
-import 'package:flutter_phantom_demo/models/largest_account_response.dart';
-import 'package:flutter_phantom_demo/models/total_supply_response.dart';
+import 'package:Sol_Swap/models/balance_response.dart';
+import 'package:Sol_Swap/models/largest_account_response.dart';
+import 'package:Sol_Swap/models/total_supply_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AccountRepo {

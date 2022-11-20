@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phantom_demo/Bloc/Accounts/account_bloc.dart';
-import 'package:flutter_phantom_demo/resources/ui_helpers.dart';
+import 'package:Sol_Swap/Bloc/Accounts/account_bloc.dart';
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:solana/solana.dart';
 
 class LargestAccountScreen extends StatefulWidget {
