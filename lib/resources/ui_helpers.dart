@@ -31,6 +31,8 @@ extension CustomContext on BuildContext {
       MediaQuery.of(this).size.width * percent;
 }
 
+double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
+double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
 Widget emptyBox() => const SizedBox.shrink();
 
 AppBar noTitleAppBar({bool isLight = true, bool leading = true}) {

@@ -16,7 +16,6 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var walletAddrs = phantomConnectInstance.userPublicKey;
-    List contacts = storage.read("contacts");
 
     return Drawer(
       child: Material(
@@ -37,14 +36,11 @@ class Sidebar extends StatelessWidget {
                         selectedItem(context, 0, phantomConnectInstance),
                   ),
                   const SizedBox(height: 16),
-                  Visibility(
-                    visible: contacts.isNotEmpty,
-                    child: buildSideBarButton(
-                      text: 'My Contacts',
-                      icon: Icons.contact_mail,
-                      onClicked: () =>
-                          selectedItem(context, 5, phantomConnectInstance),
-                    ),
+                  buildSideBarButton(
+                    text: 'My Contacts',
+                    icon: Icons.contact_mail,
+                    onClicked: () =>
+                        selectedItem(context, 5, phantomConnectInstance),
                   ),
                   const SizedBox(height: 16),
                   buildSideBarButton(

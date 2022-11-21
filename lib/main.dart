@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/Bloc/Asset/asset_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Sol_Swap/Bloc/Accounts/account_bloc.dart';
@@ -33,7 +34,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => AccountBloc(accountRepo: AccountIMPL()))
+              create: (context) => AccountBloc(accountRepo: AccountIMPL())),
+              BlocProvider(
+                create: (context) => AssetBloc(assetRepo: AccountIMPL()),
+                child: Container(),
+              )
         ],
         child: GetMaterialApp(
           title: 'Phantom Dart Demo',

@@ -128,8 +128,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: provider.isConnected
           ? AppBar(
-              title: Text("Sol Swap"),
+              elevation: 10,
+              title: Text(
+                "Sol Swap",
+                style: TextStyle(color: Colors.white),
+              ),
               centerTitle: true,
+              backgroundColor: Colors.black,
             )
           : null,
       drawer: provider.isConnected

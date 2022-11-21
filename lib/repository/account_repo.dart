@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:Sol_Swap/models/all_assets.dart';
+import 'package:Sol_Swap/models/asset_chart.dart';
+import 'package:Sol_Swap/models/asset_response.dart';
 import 'package:Sol_Swap/models/balance_response.dart';
 import 'package:Sol_Swap/models/largest_account_response.dart';
 import 'package:Sol_Swap/models/total_supply_response.dart';
@@ -9,6 +12,9 @@ abstract class AccountRepo {
   Future<BalanceResponse> getBalance({required String pubKey});
   Future<largetsAccountResponse> getLargestAccount();
   Future<TotalSupplyResponse> getTotalSupply();
+  Future<AssetResponse> getCurrentPrice({required String coinName});
+  Future<AssetPriceResponse> getChart({required String coinName});
+  Future<AllAssets> getAllAssets();
 }
 
 class AccountIMPL extends AccountRepo {
@@ -62,6 +68,62 @@ class AccountIMPL extends AccountRepo {
     print(">>>>>>>>>>>>>>>>${response.body}");
     if (response.statusCode == 200) {
       return TotalSupplyResponse.fromJson(jsonDecode(response.body));
+    }
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<AssetPriceResponse> getChart({required String coinName}) async {
+    final response = await http
+        .get(Uri.parse("https://api.coincap.io/v2/assets/$coinName"), headers: {
+      "Content-Type": "application/json",
+    });
+    print(">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/$coinName"}");
+    print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
+    print(">>>>>>>>>>>>>>>>>>Request-body$coinName");
+    print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
+    print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
+    if (response.statusCode == 200) {
+      print(response.body);
+      return AssetPriceResponse.fromJson(jsonDecode(response.body));
+    }
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<AssetResponse> getCurrentPrice({required String coinName}) async {
+    final response = await http.get(
+        Uri.parse(
+            "https://api.coincap.io/v2/assets/$coinName/history?interval=d1"),
+        headers: {
+          "Content-Type": "application/json",
+        });
+    print(
+        ">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/$coinName/history?interval=d1"}");
+    print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
+    print(">>>>>>>>>>>>>>>>>>Request-body$coinName");
+    print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
+    print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
+    if (response.statusCode == 200) {
+      print(response.body);
+      return AssetResponse.fromJson(jsonDecode(response.body));
+    }
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<AllAssets> getAllAssets() async {
+    final response =
+        await http.get(Uri.parse("https://api.coincap.io/v2/assets"), headers: {
+      "Content-Type": "application/json",
+    });
+    print(">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets"}");
+    print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
+    print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
+    print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
+    if (response.statusCode == 200) {
+      print(response.body);
+      return AllAssets.fromJson(jsonDecode(response.body));
     }
     throw UnimplementedError();
   }

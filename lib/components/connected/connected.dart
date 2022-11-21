@@ -109,7 +109,7 @@ class _ConnectedState extends State<Connected> {
                     var amount = state.model.result!.value!.lamports;
                     return Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
