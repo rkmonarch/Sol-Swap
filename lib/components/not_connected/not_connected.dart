@@ -187,7 +187,7 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(change24h!) >= 0
+                            color: double.parse(change24h ?? "0") >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,

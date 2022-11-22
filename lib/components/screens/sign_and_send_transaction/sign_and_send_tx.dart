@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:solana/encoder.dart';
 import 'package:solana/solana.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class SignAndSendTransactionScreen extends StatefulWidget {
   final PhantomConnect phantomConnectInstance;
@@ -61,10 +63,19 @@ class _SignAndSendTransactionScreenState
       mode: LaunchMode.externalApplication,
     );
   }
+  List<DocumentChange<Map<String, dynamic>>> userdata = [];
 
   @override
   void initState() {
     walletAddressController.text = widget.pubkey;
+     FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((documentSnapshot) {
+      setState(() {
+        userdata = documentSnapshot.docChanges;
+      });
+    });
     super.initState();
   }
 
@@ -78,7 +89,7 @@ class _SignAndSendTransactionScreenState
           backgroundColor: Colors.white,
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateContactScreen()));
+                MaterialPageRoute(builder: (context) => CreateContactScreen(phantomConnectInstance: widget.phantomConnectInstance,)));
           },
           child: Icon(
             Icons.add,

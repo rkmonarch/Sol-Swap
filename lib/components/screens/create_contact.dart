@@ -1,10 +1,15 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:Sol_Swap/main.dart';
-import 'package:Sol_Swap/resources/app_assets.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
+import 'package:phantom_connect/phantom_connect.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class CreateContactScreen extends StatefulWidget {
-  CreateContactScreen({super.key});
+  final PhantomConnect phantomConnectInstance;
+
+  CreateContactScreen({super.key, required this.phantomConnectInstance});
 
   @override
   State<CreateContactScreen> createState() => _CreateContactScreenState();
@@ -16,50 +21,29 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formkey = GlobalKey<FormState>();
   List contacts = [];
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
   @override
   void initState() {
-    var contact = storage.read("contacts");
-    print("before contact is $contact");
-    contacts.add(contact);
     super.initState();
+  }
+
+  Future<DocumentReference<Object?>?> adduser(
+      {required String name, required String pubKey}) async {
+    await users.add({
+      'name': name,
+      'pubKey': pubKey,
+    }).then((documentReference) {
+      // clearForm();
+     
+    }).catchError((e) {
+      print("My Error is $e");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("Create Contact"),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Center(
-            child: ElevatedButton(
-              onPressed: () {
-                if (pubkeyController.text.length > 1 &&
-                    nameController.text.isNotEmpty) {
-                  contactsGloble.add({
-                    "address": pubkeyController.text.trim(),
-                    "name": nameController.text.trim()
-                  });
-                  showInfoMessage(
-                      message: "Contact Added Successfully", title: "Info");
-                  Navigator.pop(context);
-                } else {
-                  showInfoMessage(
-                      message: "Please submit required fields", title: "Error");
-                }
-              },
-              child: Text("Save Wallet Contact"),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(500, 50),
-                elevation: 4,
-              ),
-            ),
-          ),
-        ),
-      ]),
       key: _scaffoldKey,
       backgroundColor: Colors.black,
       body: Padding(
@@ -127,6 +111,30 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
                         fontWeight: FontWeight.normal),
                   )),
               vSpaceLarge,
+              vSpaceLarge,
+              vSpaceLarge,
+              vSpaceLarge,
+              vSpaceLarge,
+              ElevatedButton(
+                  onPressed: () {
+                    // FirebaseFirestore.instance.collection("users").add({
+                    //   "name": nameController.text,
+                    //   "PubKey": pubkeyController
+                    //       .text //your data which will be added to the collection and collection will be created after this
+                    // }).then((_) {
+                    //   print("collection created");
+                    // }).catchError((error) {
+                    //   print(error.toString());
+                    // });
+                    adduser(
+                        name: nameController.text,
+                        pubKey: pubkeyController.text);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(screenWidth(context), 50),
+                    elevation: 4,
+                  ),
+                  child: Text("Save"))
             ],
           ),
         ),

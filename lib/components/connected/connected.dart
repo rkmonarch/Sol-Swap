@@ -89,7 +89,7 @@ class _ConnectedState extends State<Connected> {
         return SignTransactionScreen(
             phantomConnectInstance: widget.phantomConnectInstance);
       case Screens.contacts:
-        return CreateContactScreen();
+        return CreateContactScreen(phantomConnectInstance: widget.phantomConnectInstance,);
       default:
         return Center(
           child: Column(

@@ -9,11 +9,14 @@ import 'package:Sol_Swap/views/home.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final storage = GetStorage();
 
 void main() async {
   await GetStorage.init();
+  await Firebase.initializeApp();
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
@@ -35,10 +38,10 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
               create: (context) => AccountBloc(accountRepo: AccountIMPL())),
-              BlocProvider(
-                create: (context) => AssetBloc(assetRepo: AccountIMPL()),
-                child: Container(),
-              )
+          BlocProvider(
+            create: (context) => AssetBloc(assetRepo: AccountIMPL()),
+            child: Container(),
+          )
         ],
         child: GetMaterialApp(
           title: 'Phantom Dart Demo',
