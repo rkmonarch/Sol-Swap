@@ -12,7 +12,6 @@ abstract class AccountRepo {
   Future<BalanceResponse> getBalance({required String pubKey});
   Future<largetsAccountResponse> getLargestAccount();
   Future<TotalSupplyResponse> getTotalSupply();
-  Future<AssetResponse> getCurrentPrice({required String coinName});
   Future<AssetPriceResponse> getChart({required String coinName});
   Future<AllAssets> getAllAssets();
 }
@@ -90,26 +89,7 @@ class AccountIMPL extends AccountRepo {
     throw UnimplementedError();
   }
 
-  @override
-  Future<AssetResponse> getCurrentPrice({required String coinName}) async {
-    final response = await http.get(
-        Uri.parse(
-            "https://api.coincap.io/v2/assets/$coinName/history?interval=d1"),
-        headers: {
-          "Content-Type": "application/json",
-        });
-    print(
-        ">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/$coinName/history?interval=d1"}");
-    print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
-    print(">>>>>>>>>>>>>>>>>>Request-body$coinName");
-    print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
-    print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
-    if (response.statusCode == 200) {
-      print(response.body);
-      return AssetResponse.fromJson(jsonDecode(response.body));
-    }
-    throw UnimplementedError();
-  }
+  
 
   @override
   Future<AllAssets> getAllAssets() async {
@@ -128,3 +108,23 @@ class AccountIMPL extends AccountRepo {
     throw UnimplementedError();
   }
 }
+
+
+  Future<AssetResponse> getCurrentPrice() async {
+    final response = await http.get(
+        Uri.parse(
+            "https://api.coincap.io/v2/assets/solana"),
+        headers: {
+          "Content-Type": "application/json",
+        });
+    print(
+        ">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/solana"}");
+    print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
+    print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
+    print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
+    if (response.statusCode == 200) {
+      print(response.body);
+      return AssetResponse.fromJson(jsonDecode(response.body));
+    }
+    throw UnimplementedError();
+  }

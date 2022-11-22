@@ -1,4 +1,6 @@
 import 'package:Sol_Swap/Bloc/Asset/asset_bloc.dart';
+import 'package:Sol_Swap/repository/account_repo.dart';
+import 'package:Sol_Swap/resources/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:Sol_Swap/utils/logger.dart';
@@ -54,8 +56,22 @@ class _NotConnectedState extends State<NotConnected> {
     ),
   ];
 
+  String? marketCap, dayvolume, Solsway, change24h, priceUSD, vWap24h;
+
+  getSolana() async {
+    await getCurrentPrice().then((value) {
+      marketCap = value.data?.marketCapUsd.toString();
+      dayvolume = value.data?.volumeUsd24Hr.toString();
+      Solsway = value.data?.supply.toString();
+      change24h = value.data?.changePercent24Hr.toString();
+      priceUSD = value.data?.priceUsd.toString();
+      vWap24h = value.data?.vwap24Hr.toString();
+    });
+  }
+
   @override
   void initState() {
+    getSolana();
     BlocProvider.of<AssetBloc>(context).add(GetAllAssets());
     super.initState();
   }
@@ -115,7 +131,7 @@ class _NotConnectedState extends State<NotConnected> {
                             ),
                           ),
                           Text(
-                            'BTC Sway ',
+                            'SOL Sway ',
                             style: TextStyle(
                               color: Colors.grey[700],
                               //Color(0xff3a3841),
@@ -134,7 +150,7 @@ class _NotConnectedState extends State<NotConnected> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "\$${(data?.elementAt(0).marketCapUsd?.substring(0, 3))} B",
+                              "\$${marketCap?.substring(0, 1)} B",
                               style: TextStyle(
                                   color: Color(0xffd0d1d2), fontSize: 25),
                             ),
@@ -143,7 +159,7 @@ class _NotConnectedState extends State<NotConnected> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "\$${data?.elementAt(0).volumeUsd24Hr?.substring(0, 2)} B",
+                              "\$${dayvolume?.substring(0, 1)} B",
                               style: TextStyle(
                                   color: Color(0xffd0d1d2), fontSize: 25),
                             ),
@@ -152,7 +168,7 @@ class _NotConnectedState extends State<NotConnected> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "${data!.elementAt(0).supply.toString().substring(0, 2)} B",
+                              "${Solsway?.substring(0, 1)} B",
                               style: TextStyle(
                                   color: Color(0xffd0d1d2), fontSize: 25),
                             ),
@@ -171,20 +187,15 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(
-                                        data.elementAt(0).changePercent24Hr!) >=
-                                    0
+                            color: double.parse(change24h!) >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,
                           ),
                           Text(
-                            '${data.elementAt(0).changePercent24Hr?.substring(0, 4)}%',
+                            '${change24h!.substring(0, 4)}%',
                             style: TextStyle(
-                              color: double.parse(data
-                                          .elementAt(0)
-                                          .changePercent24Hr!) >=
-                                      0
+                              color: double.parse(change24h!) >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -196,13 +207,17 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: Color(0xff189f59),
+                            color: double.parse(priceUSD!) >= 0
+                                ? Color(0xff189f59)
+                                : Colors.red,
                             size: 18,
                           ),
                           Text(
-                            '${data.elementAt(0).priceUsd?.substring(4, 7)}%',
+                            '${priceUSD!.substring(0, 2)}%',
                             style: TextStyle(
-                              color: Color(0xff189f59),
+                              color: double.parse(priceUSD!) >= 0
+                                  ? Color(0xff189f59)
+                                  : Colors.red,
                               fontSize: 17,
                             ),
                           ),
@@ -212,13 +227,17 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: Color(0xff189f59),
+                            color: double.parse(vWap24h!) >= 0
+                                ? Color(0xff189f59)
+                                : Colors.red,
                             size: 18,
                           ),
                           Text(
-                            '${data.elementAt(0).vwap24Hr?.substring(4, 7)}%',
+                            '${vWap24h!.substring(0, 2)}%',
                             style: TextStyle(
-                              color: Color(0xff189f59),
+                              color: double.parse(vWap24h!) >= 0
+                                  ? Color(0xff189f59)
+                                  : Colors.red,
                               fontSize: 17,
                             ),
                           ),
@@ -264,7 +283,7 @@ class _NotConnectedState extends State<NotConnected> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    data.elementAt(index).name.toString(),
+                                    data!.elementAt(index).name.toString(),
                                     style: TextStyle(
                                         color: Color(0xffd0d1d2), fontSize: 18),
                                   ),
