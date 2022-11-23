@@ -11,7 +11,6 @@ import 'package:solana/solana.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class SignAndSendTransactionScreen extends StatefulWidget {
   final PhantomConnect phantomConnectInstance;
   final String pubkey;
@@ -63,15 +62,16 @@ class _SignAndSendTransactionScreenState
       mode: LaunchMode.externalApplication,
     );
   }
+
   List<DocumentChange<Map<String, dynamic>>> userdata = [];
 
   @override
   void initState() {
-    walletAddressController.text = widget.pubkey;
-     FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('users')
         .get()
         .then((documentSnapshot) {
+      print(documentSnapshot);
       setState(() {
         userdata = documentSnapshot.docChanges;
       });
@@ -88,8 +88,12 @@ class _SignAndSendTransactionScreenState
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateContactScreen(phantomConnectInstance: widget.phantomConnectInstance,)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CreateContactScreen(
+                          phantomConnectInstance: widget.phantomConnectInstance,
+                        )));
           },
           child: Icon(
             Icons.add,
@@ -104,7 +108,7 @@ class _SignAndSendTransactionScreenState
               ListView.builder(
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: contactsGloble.length,
+                  itemCount: userdata.length,
                   itemBuilder: (BuildContext, index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +123,7 @@ class _SignAndSendTransactionScreenState
                             Container(
                               width: 190,
                               child: Text(
-                                contactsGloble.elementAt(index)['name'],
+                                userdata.elementAt(index).doc['name'],
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12),
                               ),
@@ -146,8 +150,8 @@ class _SignAndSendTransactionScreenState
                               ),
                               onTap: () {
                                 setState(() {
-                                  walletAddressController.text = contactsGloble
-                                      .elementAt(index)['address'];
+                                  walletAddressController.text =
+                                      userdata.elementAt(index).doc['address'];
                                 });
                                 showDialog(
                                     context: context,
@@ -203,7 +207,7 @@ class _SignAndSendTransactionScreenState
                         ),
                         vSpaceSmall,
                         Text(
-                          (contactsGloble.elementAt(index)['address']),
+                          (userdata.elementAt(index).doc['pubKey']),
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                         vSpaceSmall,

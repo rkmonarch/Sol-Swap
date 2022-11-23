@@ -90,10 +90,10 @@ class _NotConnectedState extends State<NotConnected> {
           color: Colors.black,
         ),
       ),
-      backgroundColor: const Color(0xff151420),
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Sol Swap'),
-        backgroundColor: const Color(0xff151420),
+        backgroundColor: Colors.black,
         centerTitle: true,
       ),
       body: BlocBuilder<AssetBloc, AssetState>(
@@ -117,7 +117,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             'Market Cap',
                             style: TextStyle(
-                              color: Colors.grey[700],
+                              color: Colors.grey[500],
                               //Color(0xff3a3841),
                               fontSize: 17,
                             ),
@@ -125,7 +125,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             '24h Volume',
                             style: TextStyle(
-                              color: Colors.grey[700],
+                              color: Colors.grey[500],
                               //Color(0xff3a3841),
                               fontSize: 17,
                             ),
@@ -133,7 +133,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             'SOL Sway ',
                             style: TextStyle(
-                              color: Colors.grey[700],
+                              color: Colors.grey[500],
                               //Color(0xff3a3841),
                               fontSize: 17,
                             ),
@@ -193,7 +193,7 @@ class _NotConnectedState extends State<NotConnected> {
                             size: 18,
                           ),
                           Text(
-                            '${change24h!.substring(0, 4)}%',
+                            '${change24h?.substring(0, 4)}%',
                             style: TextStyle(
                               color: double.parse(change24h!) >= 0
                                   ? Color(0xff189f59)
@@ -272,7 +272,7 @@ class _NotConnectedState extends State<NotConnected> {
                           child: Row(children: [
                             CircleAvatar(
                                 radius: deviceHeight(context) * 0.04,
-                                backgroundColor: Color(0xff23222c),
+                                backgroundColor: Colors.black,
                                 child: icons.elementAt(index)),
                             Container(
                               width: deviceWidth(context) * 0.27,

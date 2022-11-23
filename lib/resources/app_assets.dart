@@ -1,6 +1,7 @@
 //images
 
 const String solana = 'assets/solana.png';
+const String verfied = 'assets/verified.png';
 
 List contactsGloble = [];
 

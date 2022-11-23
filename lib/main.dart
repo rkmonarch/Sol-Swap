@@ -15,9 +15,9 @@ final storage = GetStorage();
 
 void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [

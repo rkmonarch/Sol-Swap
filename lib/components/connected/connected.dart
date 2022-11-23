@@ -89,7 +89,9 @@ class _ConnectedState extends State<Connected> {
         return SignTransactionScreen(
             phantomConnectInstance: widget.phantomConnectInstance);
       case Screens.contacts:
-        return CreateContactScreen(phantomConnectInstance: widget.phantomConnectInstance,);
+        return CreateContactScreen(
+          phantomConnectInstance: widget.phantomConnectInstance,
+        );
       default:
         return Center(
           child: Column(
@@ -115,7 +117,7 @@ class _ConnectedState extends State<Connected> {
                         children: [
                           vSpaceMedium,
                           Text(
-                            "Account Information",
+                            "My Address",
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                           vSpaceSmall,

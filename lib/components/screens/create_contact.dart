@@ -34,8 +34,6 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
       'name': name,
       'pubKey': pubKey,
     }).then((documentReference) {
-      // clearForm();
-     
     }).catchError((e) {
       print("My Error is $e");
     });

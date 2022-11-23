@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/resources/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/providers/wallet_state_provider.dart';
 import 'package:Sol_Swap/utils/logger.dart';
@@ -47,7 +48,9 @@ class _SignatureVerifyScreenState extends State<SignatureVerifyScreen> {
       appBar: AppBar(
         title: const Text('Signature Verification'),
         centerTitle: true,
+        backgroundColor: Colors.black,
       ),
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,13 +75,15 @@ class _SignatureVerifyScreenState extends State<SignatureVerifyScreen> {
                       ),
                     ]
                   : [
-                      const Text(
+                       Text(
                         "Signature verified",
                         style: TextStyle(
                             color: Colors.green,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
+                    
+                      Image.asset(solana)
                     ],
         ),
       ),
