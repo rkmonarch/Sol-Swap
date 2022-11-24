@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Sol_Swap/Bloc/Accounts/account_bloc.dart';
@@ -28,6 +29,7 @@ class _ConnectedState extends State<Connected> {
   void initState() {
     BlocProvider.of<AccountBloc>(context).add(
         getBalanceEvent(pubkey: widget.phantomConnectInstance.userPublicKey));
+    storage.write("pKey", widget.phantomConnectInstance.userPublicKey);
     super.initState();
   }
 

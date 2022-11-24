@@ -1,4 +1,5 @@
 import 'package:Sol_Swap/Bloc/Asset/asset_bloc.dart';
+import 'package:Sol_Swap/Bloc/NFT/nft_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Sol_Swap/Bloc/Accounts/account_bloc.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => NftBloc(),
+            child: Container(),
+          ),
           BlocProvider(
               create: (context) => AccountBloc(accountRepo: AccountIMPL())),
           BlocProvider(

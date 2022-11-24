@@ -168,7 +168,7 @@ class _NotConnectedState extends State<NotConnected> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "${Solsway?.substring(0, 1)} B",
+                              "\$${Solsway?.substring(0, 1)} B",
                               style: TextStyle(
                                   color: Color(0xffd0d1d2), fontSize: 25),
                             ),

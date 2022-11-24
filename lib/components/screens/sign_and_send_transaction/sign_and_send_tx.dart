@@ -103,123 +103,152 @@ class _SignAndSendTransactionScreenState
         backgroundColor: Colors.black,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-          child: Column(
-            children: [
-              ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: userdata.length,
-                  itemBuilder: (BuildContext, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            hSpaceSmall,
-                            Container(
-                              width: 190,
-                              child: Text(
-                                userdata.elementAt(index).doc['name'],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                userdata.isNotEmpty
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: userdata.length,
+                        itemBuilder: (BuildContext, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                  ),
+                                  hSpaceSmall,
+                                  Container(
+                                    width: 190,
+                                    child: Text(
+                                      userdata.elementAt(index).doc['name'],
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                  hSpaceMassive,
+                                  InkWell(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(50)),
+                                    splashColor: Colors.white12,
+                                    child: Center(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 0,
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(20)),
+                                        ),
+                                        child: const Icon(Icons.send,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        walletAddressController.text = userdata
+                                            .elementAt(index)
+                                            .doc['pubKey'];
+                                      });
+                                      showDialog(
+                                          context: context,
+                                          builder: (builder) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              actions: [
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 30),
+                                                  child: Column(
+                                                    children: [
+                                                      styledTextFeild(
+                                                          walletAddressController,
+                                                          "User Wallet Address",
+                                                          TextInputType.number,
+                                                          true,
+                                                          Icons.wallet),
+                                                      const SizedBox(
+                                                          height: 10),
+                                                      styledTextFeild(
+                                                          solAmountController,
+                                                          "Enter Amount in Sol",
+                                                          TextInputType.number,
+                                                          false,
+                                                          Icons.money),
+                                                      const SizedBox(
+                                                          height: 10),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          signAndSendTransaction(
+                                                              walletState);
+                                                          solAmountController
+                                                              .clear();
+                                                          walletAddressController
+                                                              .clear();
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                            minimumSize: Size(
+                                                                screenWidth(
+                                                                        context) *
+                                                                    0.3,
+                                                                screenHeight(
+                                                                        context) *
+                                                                    0.05),
+                                                            primary:
+                                                                Colors.black),
+                                                        child: const Text(
+                                                          "Sign and Send",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              vSpaceSmall,
+                              Text(
+                                (userdata.elementAt(index).doc['pubKey']),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12),
                               ),
-                            ),
-                            hSpaceMassive,
-                            InkWell(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
-                              splashColor: Colors.white12,
-                              child: Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 0,
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
-                                  ),
-                                  child: const Icon(Icons.send,
-                                      color: Colors.white),
-                                ),
+                              vSpaceSmall,
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
                               ),
-                              onTap: () {
-                                setState(() {
-                                  walletAddressController.text =
-                                      userdata.elementAt(index).doc['address'];
-                                });
-                                showDialog(
-                                    context: context,
-                                    builder: (builder) {
-                                      return AlertDialog(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        actions: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 10.0, vertical: 30),
-                                            child: Column(
-                                              children: [
-                                                styledTextFeild(
-                                                    walletAddressController,
-                                                    "User Wallet Address",
-                                                    TextInputType.number,
-                                                    true,
-                                                    "Enter User wallet Address",
-                                                    Icons.wallet),
-                                                const SizedBox(height: 10),
-                                                styledTextFeild(
-                                                    solAmountController,
-                                                    "1 SOL = 1,000,000,000 LAMPORTS",
-                                                    TextInputType.number,
-                                                    false,
-                                                    "Enter amount to send in SOL",
-                                                    Icons.circle_outlined),
-                                                const SizedBox(height: 10),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    signAndSendTransaction(
-                                                        walletState);
-                                                    solAmountController.clear();
-                                                    walletAddressController
-                                                        .clear();
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text(
-                                                      "Sign and Send"),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      );
-                                    });
-                              },
-                            ),
-                          ],
+                              vSpaceSmall
+                            ],
+                          );
+                        })
+                    : Center(
+                        child: Text(
+                          "No contacts in list",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        vSpaceSmall,
-                        Text(
-                          (userdata.elementAt(index).doc['pubKey']),
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        ),
-                        vSpaceSmall,
-                        Divider(
-                          color: Colors.white,
-                          thickness: 1,
-                        ),
-                        vSpaceSmall
-                      ],
-                    );
-                  }),
-            ],
+                      )
+              ],
+            ),
           ),
         ));
   }

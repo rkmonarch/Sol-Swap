@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/providers/wallet_state_provider.dart';
@@ -39,17 +40,26 @@ class _SignInMessageScreenState extends State<SignInMessageScreen> {
             const Text(
               "Once app is connected to Phantom, we can request that the user signs a given message.\nMessage signatures do not involve network fees and are a convenient way for apps to verify ownership of an address.",
               style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                _signInAUth(walletState);
-              },
-              child: const Text("Sign Message"),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    minimumSize: Size(screenWidth(context) * 0.5,
+                        screenHeight(context) * 0.05),
+                    primary: Colors.white),
+                onPressed: () {
+                  _signInAUth(walletState);
+                },
+                child: const Text(
+                  "Sign Message",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             ),
           ],
         ),

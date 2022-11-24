@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget styledTextFeild(TextEditingController controller, String hint, TextInputType keyboard,
-    bool readonly, String label, IconData icon) {
+Widget styledTextFeild(TextEditingController controller, String hint,
+    TextInputType keyboard, bool readonly, IconData icon) {
   return TextFormField(
     keyboardType: keyboard,
     readOnly: readonly,
     controller: controller,
     decoration: InputDecoration(
-      label: Text(label),
       enabledBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.black38),
         borderRadius: BorderRadius.circular(5.5),

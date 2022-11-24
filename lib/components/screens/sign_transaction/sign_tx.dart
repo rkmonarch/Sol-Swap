@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/components/styled_text_feild.dart';
 import 'package:Sol_Swap/providers/wallet_state_provider.dart';
@@ -60,35 +61,51 @@ class _SignTransactionScreenState extends State<SignTransactionScreen> {
     final walletState =
         Provider.of<WalletStateProvider>(context, listen: false);
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-          child: Column(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
         children: [
-          styledTextFeild(
-              walletAddressController,
-              "User Wallet Address",
-              TextInputType.number,
-              false,
-              "Enter User wallet Address",
-              Icons.wallet),
-          const SizedBox(height: 10),
-          styledTextFeild(
-              solAmountController,
-              "1 SOL = 1,000,000,000 LAMPORTS",
-              TextInputType.number,
-              false,
-              "Enter amount to send in SOL",
-              Icons.circle_outlined),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              signAndSendTransaction(walletState);
-            },
-            child: const Text("Sign Transaction"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+                child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: screenWidth(context) * 0.03),
+              child: Column(
+                children: [
+                  vSpaceMedium,
+                  styledTextFeild(
+                      walletAddressController,
+                      "User Wallet Address",
+                      TextInputType.number,
+                      false,
+                      Icons.wallet),
+                  const SizedBox(height: 10),
+                  styledTextFeild(solAmountController, "Enter Amount in Sol",
+                      TextInputType.number, false, Icons.money),
+                  const SizedBox(height: 10),
+                  vSpaceMassive,
+                  vSpaceMassive,
+                  vSpaceMassive,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(screenWidth(context) * 0.5,
+                            screenHeight(context) * 0.05),
+                        primary: Colors.white),
+                    onPressed: () {
+                      signAndSendTransaction(walletState);
+                    },
+                    child: const Text(
+                      "Sign Transaction",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  )
+                ],
+              ),
+            )),
           )
         ],
-      )),
+      ),
     );
   }
 }
