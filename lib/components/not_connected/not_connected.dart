@@ -100,7 +100,9 @@ class _NotConnectedState extends State<NotConnected> {
         builder: (context, state) {
           if (state is AllAssetsLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
             );
           } else if (state is AllAssetsSuccess) {
             var data = state.model.data;
@@ -195,7 +197,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             '${change24h?.substring(0, 4)}%',
                             style: TextStyle(
-                              color: double.parse(change24h.toString()) >= 0
+                              color: double.parse(change24h ?? "5.0") >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -207,7 +209,7 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(priceUSD.toString()) >= 0
+                            color: double.parse(priceUSD ?? "10") >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,
@@ -215,7 +217,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             '${priceUSD.toString().substring(0, 2)}%',
                             style: TextStyle(
-                              color: double.parse(priceUSD.toString()) >= 0
+                              color: double.parse(priceUSD ?? "10") >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -227,15 +229,15 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(vWap24h.toString()) >= 0
+                            color: double.parse(vWap24h ?? "-2") >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,
                           ),
                           Text(
-                            '${vWap24h!.substring(0, 2)}%',
+                            '${vWap24h?.substring(0, 2)}%',
                             style: TextStyle(
-                              color: double.parse(vWap24h.toString()) >= 0
+                              color: double.parse(vWap24h ?? "5") >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,

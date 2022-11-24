@@ -90,10 +90,10 @@ class _TransactionStatusState extends State<TransactionStatus> {
                         "Status: ${_transactionStatus?.confirmationStatus}",
                         style: textStyle,
                       ),
+                      vSpaceSmall,
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            minimumSize: Size(screenWidth(context) * 0.5,
-                                screenHeight(context) * 0.05),
+                            minimumSize: Size(screenWidth(context) * 0.5, 50),
                             primary: Colors.white),
                         onPressed: () {
                           launchUrl(
@@ -106,16 +106,61 @@ class _TransactionStatusState extends State<TransactionStatus> {
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
+                      vSpaceSmall,
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                           ),
                           onPressed: () async {
-                            claimNFT(walletAddress: wallet).then((value) {
-                              if (value.claimedAddresses != null) {
-                                log("claimed");
-                              }
-                            });
+                            // claimNFT(walletAddress: wallet).then((value) {
+                            //   if (value.claimedAddresses != null) {
+                            //     log("claimed");
+                            //   }
+                            // });
+                            showDialog(
+                                          context: context,
+                                          builder: (builder) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              actions: [
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 30),
+                                                  child: Column(
+                                                    children: [
+                                                    
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                        
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                minimumSize: Size(
+                                                                    screenWidth(
+                                                                        context),
+                                                                    50),
+                                                                primary: Colors
+                                                                    .black),
+                                                        child: const Text(
+                                                          "Sign and Send",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          });
                           },
                           child: Text("Check Rewards")),
                     ],

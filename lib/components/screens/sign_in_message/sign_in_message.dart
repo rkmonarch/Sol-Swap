@@ -31,9 +31,9 @@ class _SignInMessageScreenState extends State<SignInMessageScreen> {
   Widget build(BuildContext context) {
     final walletState =
         Provider.of<WalletStateProvider>(context, listen: false);
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Center(
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth(context) * 0.05),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,8 +49,7 @@ class _SignInMessageScreenState extends State<SignInMessageScreen> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    minimumSize: Size(screenWidth(context) * 0.5,
-                        screenHeight(context) * 0.05),
+                    minimumSize: Size(screenWidth(context), 50),
                     primary: Colors.white),
                 onPressed: () {
                   _signInAUth(walletState);

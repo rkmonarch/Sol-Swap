@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/components/screens/screens.dart';
 import 'package:Sol_Swap/main.dart';
@@ -35,13 +36,13 @@ class Sidebar extends StatelessWidget {
                     onClicked: () =>
                         selectedItem(context, 0, phantomConnectInstance),
                   ),
-                  const SizedBox(height: 16),
-                  buildSideBarButton(
-                    text: 'My Contacts',
-                    icon: Icons.contact_mail,
-                    onClicked: () =>
-                        selectedItem(context, 5, phantomConnectInstance),
-                  ),
+                  // const SizedBox(height: 16),
+                  // buildSideBarButton(
+                  //   text: 'Add Contact',
+                  //   icon: Icons.contact_mail,
+                  //   onClicked: () =>
+                  //       selectedItem(context, 5, phantomConnectInstance),
+                  // ),
                   const SizedBox(height: 16),
                   buildSideBarButton(
                     text: 'Sign Message',
@@ -72,7 +73,7 @@ class Sidebar extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   const Divider(color: Colors.white70),
-                  const SizedBox(height: 24),
+                  SizedBox(height: screenHeight(context) * 0.2),
                   const _buildSocialWidgets()
                 ],
               ),

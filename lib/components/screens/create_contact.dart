@@ -1,10 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 
 class CreateContactScreen extends StatefulWidget {
   final PhantomConnect phantomConnectInstance;
@@ -30,18 +28,29 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
 
   Future<DocumentReference<Object?>?> adduser(
       {required String name, required String pubKey}) async {
-    await users.add({
-      'name': name,
-      'pubKey': pubKey,
-    }).then((documentReference) {
-    }).catchError((e) {
-      print("My Error is $e");
-    });
+    await users
+        .add({
+          'name': name,
+          'pubKey': pubKey,
+        })
+        .then((documentReference) {})
+        .catchError((e) {
+          print("My Error is $e");
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Sol Swap",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+      ),
       key: _scaffoldKey,
       backgroundColor: Colors.black,
       body: Padding(
@@ -115,24 +124,18 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
               vSpaceLarge,
               ElevatedButton(
                   onPressed: () {
-                    // FirebaseFirestore.instance.collection("users").add({
-                    //   "name": nameController.text,
-                    //   "PubKey": pubkeyController
-                    //       .text //your data which will be added to the collection and collection will be created after this
-                    // }).then((_) {
-                    //   print("collection created");
-                    // }).catchError((error) {
-                    //   print(error.toString());
-                    // });
                     adduser(
                         name: nameController.text,
                         pubKey: pubkeyController.text);
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(screenWidth(context), 50),
-                    elevation: 4,
-                  ),
-                  child: Text("Save"))
+                      minimumSize: Size(screenWidth(context), 50),
+                      elevation: 4,
+                      primary: Colors.white),
+                  child: Text(
+                    "Save",
+                    style: TextStyle(color: Colors.black),
+                  ))
             ],
           ),
         ),

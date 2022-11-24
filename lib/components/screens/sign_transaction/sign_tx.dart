@@ -63,48 +63,49 @@ class _SignTransactionScreenState extends State<SignTransactionScreen> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-                child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: screenWidth(context) * 0.03),
-              child: Column(
-                children: [
-                  vSpaceMedium,
-                  styledTextFeild(
-                      walletAddressController,
-                      "User Wallet Address",
-                      TextInputType.number,
-                      false,
-                      Icons.wallet),
-                  const SizedBox(height: 10),
-                  styledTextFeild(solAmountController, "Enter Amount in Sol",
-                      TextInputType.number, false, Icons.money),
-                  const SizedBox(height: 10),
-                  vSpaceMassive,
-                  vSpaceMassive,
-                  vSpaceMassive,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(screenWidth(context) * 0.5,
-                            screenHeight(context) * 0.05),
-                        primary: Colors.white),
-                    onPressed: () {
-                      signAndSendTransaction(walletState);
-                    },
-                    child: const Text(
-                      "Sign Transaction",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  )
-                ],
-              ),
-            )),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth(context) * 0.05),
+                child: Column(
+                  children: [
+                    vSpaceMedium,
+                    styledTextFeild(
+                        walletAddressController,
+                        "User Wallet Address",
+                        TextInputType.name,
+                        false,
+                        Icons.wallet),
+                    const SizedBox(height: 10),
+                    styledTextFeild(solAmountController, "Enter Amount in Sol",
+                        TextInputType.number, false, Icons.money),
+                    const SizedBox(height: 10),
+                    vSpaceMassive,
+                    vSpaceMassive,
+                    vSpaceMassive,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(screenWidth(context), 50),
+                          primary: Colors.white),
+                      onPressed: () {
+                        signAndSendTransaction(walletState);
+                      },
+                      child: const Text(
+                        "Sign Transaction",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    )
+                  ],
+                ),
+              )),
+            )
+          ],
+        ),
       ),
     );
   }

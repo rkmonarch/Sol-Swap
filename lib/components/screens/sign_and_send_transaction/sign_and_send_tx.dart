@@ -199,16 +199,14 @@ class _SignAndSendTransactionScreenState
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        style: ElevatedButton.styleFrom(
-                                                            minimumSize: Size(
-                                                                screenWidth(
-                                                                        context) *
-                                                                    0.3,
-                                                                screenHeight(
-                                                                        context) *
-                                                                    0.05),
-                                                            primary:
-                                                                Colors.black),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                minimumSize: Size(
+                                                                    screenWidth(
+                                                                        context),
+                                                                    50),
+                                                                primary: Colors
+                                                                    .black),
                                                         child: const Text(
                                                           "Sign and Send",
                                                           style: TextStyle(
