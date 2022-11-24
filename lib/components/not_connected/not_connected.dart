@@ -195,7 +195,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             '${change24h?.substring(0, 4)}%',
                             style: TextStyle(
-                              color: double.parse(change24h!) >= 0
+                              color: double.parse(change24h.toString()) >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -207,15 +207,15 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(priceUSD!) >= 0
+                            color: double.parse(priceUSD.toString()) >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,
                           ),
                           Text(
-                            '${priceUSD!.substring(0, 2)}%',
+                            '${priceUSD.toString().substring(0, 2)}%',
                             style: TextStyle(
-                              color: double.parse(priceUSD!) >= 0
+                              color: double.parse(priceUSD.toString()) >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -227,7 +227,7 @@ class _NotConnectedState extends State<NotConnected> {
                         children: [
                           Icon(
                             Icons.candlestick_chart,
-                            color: double.parse(vWap24h!) >= 0
+                            color: double.parse(vWap24h.toString()) >= 0
                                 ? Color(0xff189f59)
                                 : Colors.red,
                             size: 18,
@@ -235,7 +235,7 @@ class _NotConnectedState extends State<NotConnected> {
                           Text(
                             '${vWap24h!.substring(0, 2)}%',
                             style: TextStyle(
-                              color: double.parse(vWap24h!) >= 0
+                              color: double.parse(vWap24h.toString()) >= 0
                                   ? Color(0xff189f59)
                                   : Colors.red,
                               fontSize: 17,
@@ -283,12 +283,14 @@ class _NotConnectedState extends State<NotConnected> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    data!.elementAt(index).name.toString(),
+                                    data?.elementAt(index).name.toString() ??
+                                        "",
                                     style: TextStyle(
                                         color: Color(0xffd0d1d2), fontSize: 18),
                                   ),
                                   Text(
-                                    data.elementAt(index).symbol.toString(),
+                                    data?.elementAt(index).symbol.toString() ??
+                                        "",
                                     style: TextStyle(
                                         color: Color(0xff5a5b62), fontSize: 15),
                                   ),
@@ -302,16 +304,18 @@ class _NotConnectedState extends State<NotConnected> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  "\$${data.elementAt(index).priceUsd?.substring(0, 7)}",
+                                  "\$${data?.elementAt(index).priceUsd?.substring(0, 7)}",
                                   style: TextStyle(
                                       color: Color(0xffd0d1d2), fontSize: 18),
                                 ),
                                 Text(
-                                  '${data.elementAt(index).changePercent24Hr?.substring(0, 5)}%',
+                                  '${data?.elementAt(index).changePercent24Hr?.substring(0, 5)}%',
                                   style: TextStyle(
                                     color: double.parse(data
-                                                .elementAt(index)
-                                                .changePercent24Hr!) >=
+                                                    ?.elementAt(index)
+                                                    .changePercent24Hr
+                                                    .toString() ??
+                                                "") >=
                                             0
                                         ? Color(0xff189f59)
                                         : Colors.red,
