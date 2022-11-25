@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Sol_Swap/models/air_drop_response.dart';
 import 'package:Sol_Swap/models/all_assets.dart';
 import 'package:Sol_Swap/models/asset_chart.dart';
 import 'package:Sol_Swap/models/asset_response.dart';
@@ -14,6 +15,7 @@ abstract class AccountRepo {
   Future<TotalSupplyResponse> getTotalSupply();
   Future<AssetPriceResponse> getChart({required String coinName});
   Future<AllAssets> getAllAssets();
+  Future<AirDropResponse> requestAirDrop({required String pubKey});
 }
 
 class AccountIMPL extends AccountRepo {
@@ -89,8 +91,6 @@ class AccountIMPL extends AccountRepo {
     throw UnimplementedError();
   }
 
-  
-
   @override
   Future<AllAssets> getAllAssets() async {
     final response =
@@ -107,24 +107,43 @@ class AccountIMPL extends AccountRepo {
     }
     throw UnimplementedError();
   }
-}
 
-
-  Future<AssetResponse> getCurrentPrice() async {
-    final response = await http.get(
-        Uri.parse(
-            "https://api.coincap.io/v2/assets/solana"),
-        headers: {
-          "Content-Type": "application/json",
-        });
-    print(
-        ">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/solana"}");
+  @override
+  Future<AirDropResponse> requestAirDrop({required String pubKey}) async {
+    var data = json.encode({
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "requestAirdrop",
+      "params": [pubKey, 1000000000]
+    });
+    final response = await http
+        .post(Uri.parse("https://api.devnet.solana.com"), body: data, headers: {
+      "Content-Type": "application/json",
+    });
+    print(">>>>>>>>>>>>>>>>>>${"https://api.devnet.solana.com"}");
     print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
     print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
     print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
     if (response.statusCode == 200) {
       print(response.body);
-      return AssetResponse.fromJson(jsonDecode(response.body));
+      return AirDropResponse.fromJson(jsonDecode(response.body));
     }
     throw UnimplementedError();
   }
+}
+
+Future<AssetResponse> getCurrentPrice() async {
+  final response = await http
+      .get(Uri.parse("https://api.coincap.io/v2/assets/solana"), headers: {
+    "Content-Type": "application/json",
+  });
+  print(">>>>>>>>>>>>>>>>>>${"https://api.coincap.io/v2/assets/solana"}");
+  print(">>>>>>>>>>>>>>>>>>${response.request?.method}");
+  print(">>>>>>>>>>>>>>>>>>${response.statusCode}");
+  print(">>>>>>>>>>>>>>>>>>Response_body${response.body}");
+  if (response.statusCode == 200) {
+    print(response.body);
+    return AssetResponse.fromJson(jsonDecode(response.body));
+  }
+  throw UnimplementedError();
+}

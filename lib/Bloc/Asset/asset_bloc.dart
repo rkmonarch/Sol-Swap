@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:Sol_Swap/models/air_drop_response.dart';
 import 'package:Sol_Swap/models/all_assets.dart';
 import 'package:Sol_Swap/models/asset_chart.dart';
 import 'package:Sol_Swap/models/asset_response.dart';
@@ -27,6 +30,15 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
           final AllAssets model = await assetRepo.getAllAssets();
           emit.call(AllAssetsSuccess(model: model));
         } catch (e) {}
+      } else if (event is RequestAirDropEvent) {
+        emit.call(requestAirdropLoading());
+        try {
+          final AirDropResponse model =
+              await assetRepo.requestAirDrop(pubKey: event.pubKey);
+          emit.call(RequestAirdropSuccess(model: model));
+        } catch (e) {
+          log(e.toString());
+        }
       }
     });
   }

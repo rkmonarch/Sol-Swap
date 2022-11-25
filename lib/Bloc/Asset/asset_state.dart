@@ -20,3 +20,11 @@ class AllAssetsSuccess extends AssetState {
   final AllAssets model;
   AllAssetsSuccess({required this.model});
 }
+
+
+class requestAirdropLoading extends AssetState {}
+
+class RequestAirdropSuccess extends AssetState {
+  final AirDropResponse model;
+  RequestAirdropSuccess({required this.model});
+}

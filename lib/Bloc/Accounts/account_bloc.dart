@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Sol_Swap/models/air_drop_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:Sol_Swap/models/balance_response.dart';
 import 'package:Sol_Swap/models/largest_account_response.dart';
@@ -38,7 +39,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         } catch (e) {
           log(e.toString());
         }
-      }
+      } 
     });
   }
 }

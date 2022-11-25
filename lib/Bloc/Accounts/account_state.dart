@@ -25,3 +25,4 @@ class TotalSupplySuccess extends AccountState {
   final TotalSupplyResponse model;
   TotalSupplySuccess({required this.model});
 }
+

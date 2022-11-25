@@ -11,3 +11,9 @@ class getAssetMarketEvent extends AssetEvent {
 }
 
 class GetAllAssets extends AssetEvent {}
+
+
+class RequestAirDropEvent extends AssetEvent {
+  final String pubKey;
+  RequestAirDropEvent({required this.pubKey});
+}

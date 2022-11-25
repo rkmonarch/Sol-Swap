@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/Bloc/Asset/asset_bloc.dart';
 import 'package:Sol_Swap/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,96 +97,111 @@ class _ConnectedState extends State<Connected> {
         );
       default:
         return Center(
-          child: Column(
-            children: [
-              BlocBuilder<AccountBloc, AccountState>(
-                builder: (context, state) {
-                  if (state is balanceLoading) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 50),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
+            child: BlocListener<AssetBloc, AssetState>(
+          listener: (context, state) {
+            if (state is RequestAirdropSuccess) {
+              BlocProvider.of<AccountBloc>(context).add(getBalanceEvent(
+                  pubkey: widget.phantomConnectInstance.userPublicKey));
+            }
+          },
+          child: BlocBuilder<AccountBloc, AccountState>(
+            builder: (context, state) {
+              if (state is balanceLoading) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              } else if (state is balanceSuccess) {
+                var amount = state.model.result!.value!.lamports;
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth(context) * 0.1, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      vSpaceMedium,
+                      Text(
+                        "My Address",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      vSpaceSmall,
+                      Container(
+                        child: Text(
+                          widget.phantomConnectInstance.userPublicKey,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),
-                    );
-                  } else if (state is balanceSuccess) {
-                    var amount = state.model.result!.value!.lamports;
-                    return Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          vSpaceMedium,
-                          Text(
-                            "My Address",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          vSpaceSmall,
-                          Container(
-                            child: Text(
-                              widget.phantomConnectInstance.userPublicKey,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-                          vSpaceMedium,
-                          vSpaceMedium,
-                          Text(
-                            "Total Balance",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          Container(
-                            child: Text(
-                              (amount! / lamportsPerSol)
-                                      .toString()
-                                      .substring(0, 6) +
-                                  " Sol",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 40),
-                            ),
-                          ),
-                          vSpaceMedium,
-                          Text(
-                            "rentEpoch",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          vSpaceSmall,
-                          Text(
-                              "(It is fee for the resource consumption on network.)",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          Container(
-                            child: Text(
-                              state.model.result!.value!.rentEpoch.toString(),
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 40),
-                            ),
-                          ),
-                          vSpaceMedium,
-                          Text(
-                            "Executable",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          Container(
-                            child: Text(
-                              state.model.result!.value!.executable.toString(),
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 40),
-                            ),
-                          ),
-                          vSpaceMedium,
-                        ],
+                      vSpaceMedium,
+                      vSpaceMedium,
+                      Text(
+                        "Total Balance",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            ],
+                      Container(
+                        child: Text(
+                          (amount! / lamportsPerSol)
+                                  .toString()
+                                  .substring(0, 6) +
+                              " Sol",
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ),
+                      vSpaceMedium,
+                      Text(
+                        "rentEpoch",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      vSpaceSmall,
+                      Text(
+                          "(It is fee for the resource consumption on network.)",
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
+                      Container(
+                        child: Text(
+                          state.model.result!.value!.rentEpoch.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ),
+                      vSpaceMedium,
+                      Text(
+                        "Executable",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Container(
+                        child: Text(
+                          state.model.result!.value!.executable.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ),
+                      vSpaceMedium,
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            BlocProvider.of<AssetBloc>(context).add(
+                                RequestAirDropEvent(
+                                    pubKey: widget
+                                        .phantomConnectInstance.userPublicKey));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(screenWidth(context) * 0.5, 50),
+                              primary: Colors.white),
+                          child: const Text(
+                            "Air Drop 1 Sol",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }
+              return Container();
+            },
           ),
-        );
+        ));
     }
   }
 }
