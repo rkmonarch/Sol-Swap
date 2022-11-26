@@ -152,7 +152,7 @@ class _NotConnectedState extends State<NotConnected> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              "\$${marketCap?.substring(0, 1)} B",
+                              "\$${marketCap?.substring(0, 1) ?? "5"} B",
                               style: TextStyle(
                                   color: Color(0xffd0d1d2), fontSize: 25),
                             ),

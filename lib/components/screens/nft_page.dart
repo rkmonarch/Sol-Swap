@@ -34,13 +34,13 @@ class _NFTState extends State<NFT> {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           backgroundColor: Colors.black,
           centerTitle: true,
           title: Text(
-            "Your NFT",
+            "Congratulations, You got an NFT",
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
         body: BlocBuilder<NftBloc, NftState>(
@@ -72,14 +72,7 @@ class _NFTState extends State<NFT> {
                       height: screenHeight(context) * 0.3,
                       width: screenWidth(context) * 0.8,
                       decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 0.3,
-                              blurRadius: 0.1,
-                              offset: const Offset(2, 3),
-                            ),
-                          ],
+                          borderRadius: BorderRadius.circular(50),
                           image: DecorationImage(
                             image: NetworkImage(data?.image.toString() ?? ""),
                           )),
@@ -89,8 +82,10 @@ class _NFTState extends State<NFT> {
                     ),
                     Text(
                       "Description",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -98,27 +93,13 @@ class _NFTState extends State<NFT> {
                     Text(
                       data?.description.toString() ?? "",
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.normal),
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Center(
-                      child: Container(
-                        width: 300,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                            ),
-                            onPressed: () async {
-                              await launchUrl(
-                                Uri.parse("https://explorer.solana.com/tx/${widget.nft_address}?cluster=devnet"),
-                                mode: LaunchMode.externalApplication,
-                              );
-                            },
-                            child: Text("Check it on Solana Explorer")),
-                      ),
-                    )
                   ],
                 ),
               );

@@ -1,11 +1,14 @@
 import 'dart:developer';
 
+import 'package:Sol_Swap/Bloc/NFT/nft_bloc.dart';
+import 'package:Sol_Swap/components/screens/nft_page.dart';
 import 'package:Sol_Swap/main.dart';
 import 'package:Sol_Swap/repository/nft_repository.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/utils/helpers.dart';
 import 'package:Sol_Swap/utils/logger.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:solana/dto.dart';
 import 'package:solana/solana.dart';
@@ -114,53 +117,14 @@ class _TransactionStatusState extends State<TransactionStatus> {
                           onPressed: () async {
                             claimNFT(walletAddress: wallet).then((value) {
                               if (value.claimedAddresses != null) {
-                                log("claimed");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NFT(
+                                            nft_address: value.claimedAddresses
+                                                .toString())));
                               }
                             });
-                            // showDialog(
-                            //               context: context,
-                            //               builder: (builder) {
-                            //                 return AlertDialog(
-                            //                   backgroundColor: Colors.white,
-                            //                   shape: RoundedRectangleBorder(
-                            //                     borderRadius:
-                            //                         BorderRadius.circular(10),
-                            //                   ),
-                            //                   actions: [
-                            //                     Padding(
-                            //                       padding: EdgeInsets.symmetric(
-                            //                           horizontal: 10.0,
-                            //                           vertical: 30),
-                            //                       child: Column(
-                            //                         children: [
-
-                            //                           ElevatedButton(
-                            //                             onPressed: () {
-
-                            //                               Navigator.pop(
-                            //                                   context);
-                            //                             },
-                            //                             style: ElevatedButton
-                            //                                 .styleFrom(
-                            //                                     minimumSize: Size(
-                            //                                         screenWidth(
-                            //                                             context),
-                            //                                         50),
-                            //                                     primary: Colors
-                            //                                         .black),
-                            //                             child: const Text(
-                            //                               "Sign and Send",
-                            //                               style: TextStyle(
-                            //                                   color:
-                            //                                       Colors.white),
-                            //                             ),
-                            //                           )
-                            //                         ],
-                            //                       ),
-                            //                     )
-                            //                   ],
-                            //                 );
-                            //               });
                           },
                           child: Text("Check Rewards")),
                     ],
