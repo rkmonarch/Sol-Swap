@@ -19,7 +19,7 @@ Sol Swap is a flutter application that allows users to make transactions and sig
 ## What I built
 
 I have built mobile application using flutter. I have used Phantom Connect
-SDK and deep linking to connect **Solana** Wallet [Phantom](https://phantom.app/) with flutter app. To create airdrop on solana, I have used [thirdweb](https://thirdweb.com/). I have used [Firebase](https://firebase.google.com/) for storing the contact details of the users. I have built our own API to claim NFT using **thirdweb SDK**. I have used [Solana JSON RPC API](https://docs.solana.com/developing/clients/jsonrpc-api) for communicating with Solana blockchain,
+SDK and deep linking to connect **Solana** Wallet [Phantom](https://phantom.app/) with flutter app. To create airdrop on solana, I have used [thirdweb](https://thirdweb.com/). I have used [Firebase](https://firebase.google.com/) for storing the contact details of the users. I have built API to claim NFT using **thirdweb SDK**. I have used [Solana JSON RPC API](https://docs.solana.com/developing/clients/jsonrpc-api) for communicating with Solana blockchain,
 and [CoinCap](https://docs.coincap.io/) open source APIs for Asset information of 24H.
 
 ## Getting Started with Flutter
