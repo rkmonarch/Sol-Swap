@@ -90,8 +90,7 @@ class _SignTransactionScreenState extends State<SignTransactionScreen> {
                     vSpaceMassive,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(screenWidth(context), 50),
-                          primary: Colors.white),
+                          minimumSize: Size(screenWidth(context), 50), backgroundColor: Colors.white),
                       onPressed: () {
                         signAndSendTransaction(walletState);
                       },

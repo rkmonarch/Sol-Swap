@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:Sol_Swap/Bloc/NFT/nft_bloc.dart';
 import 'package:Sol_Swap/components/screens/nft_page.dart';
 import 'package:Sol_Swap/main.dart';
 import 'package:Sol_Swap/repository/nft_repository.dart';
@@ -8,8 +5,6 @@ import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/utils/helpers.dart';
 import 'package:Sol_Swap/utils/logger.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:solana/dto.dart';
 import 'package:solana/solana.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -96,8 +91,7 @@ class _TransactionStatusState extends State<TransactionStatus> {
                       vSpaceSmall,
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            minimumSize: Size(screenWidth(context) * 0.5, 50),
-                            primary: Colors.white),
+                            minimumSize: Size(screenWidth(context) * 0.5, 50), backgroundColor: Colors.white),
                         onPressed: () {
                           launchUrl(
                               Uri.parse(

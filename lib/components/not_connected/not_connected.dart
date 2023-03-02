@@ -1,6 +1,5 @@
 import 'package:Sol_Swap/Bloc/Asset/asset_bloc.dart';
 import 'package:Sol_Swap/repository/account_repo.dart';
-import 'package:Sol_Swap/resources/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:Sol_Swap/utils/logger.dart';

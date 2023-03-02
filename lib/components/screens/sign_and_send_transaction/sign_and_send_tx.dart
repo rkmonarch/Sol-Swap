@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:Sol_Swap/components/screens/create_contact.dart';
 import 'package:Sol_Swap/components/styled_text_feild.dart';
 import 'package:Sol_Swap/providers/wallet_state_provider.dart';
-import 'package:Sol_Swap/resources/app_assets.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';
@@ -204,8 +203,7 @@ class _SignAndSendTransactionScreenState
                                                                 minimumSize: Size(
                                                                     screenWidth(
                                                                         context),
-                                                                    50),
-                                                                primary: Colors
+                                                                    50), backgroundColor: Colors
                                                                     .black),
                                                         child: const Text(
                                                           "Sign and Send",

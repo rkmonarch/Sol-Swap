@@ -186,8 +186,7 @@ class _ConnectedState extends State<Connected> {
                                         .phantomConnectInstance.userPublicKey));
                           },
                           style: ElevatedButton.styleFrom(
-                              minimumSize: Size(screenWidth(context) * 0.5, 50),
-                              primary: Colors.white),
+                              minimumSize: Size(screenWidth(context) * 0.5, 50), backgroundColor: Colors.white),
                           child: const Text(
                             "Air Drop 1 Sol",
                             style: TextStyle(color: Colors.black, fontSize: 16),

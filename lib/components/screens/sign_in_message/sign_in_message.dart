@@ -49,8 +49,7 @@ class _SignInMessageScreenState extends State<SignInMessageScreen> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    minimumSize: Size(screenWidth(context), 50),
-                    primary: Colors.white),
+                    minimumSize: Size(screenWidth(context), 50), backgroundColor: Colors.white),
                 onPressed: () {
                   _signInAUth(walletState);
                 },

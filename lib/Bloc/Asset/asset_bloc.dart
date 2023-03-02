@@ -1,13 +1,10 @@
 import 'dart:developer';
-
 import 'package:Sol_Swap/models/air_drop_response.dart';
 import 'package:Sol_Swap/models/all_assets.dart';
 import 'package:Sol_Swap/models/asset_chart.dart';
-import 'package:Sol_Swap/models/asset_response.dart';
 import 'package:Sol_Swap/repository/account_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
 part 'asset_event.dart';
 part 'asset_state.dart';
 

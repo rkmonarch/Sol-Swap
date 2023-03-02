@@ -1,7 +1,6 @@
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/components/screens/screens.dart';
-import 'package:Sol_Swap/main.dart';
 import 'package:Sol_Swap/providers/screen_provider.dart';
 import 'package:phantom_connect/phantom_connect.dart';
 import 'package:provider/provider.dart';

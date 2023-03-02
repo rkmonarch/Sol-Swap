@@ -1,10 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:Sol_Swap/Bloc/NFT/nft_bloc.dart';
 import 'package:Sol_Swap/main.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class NFT extends StatefulWidget {
   String nft_address;

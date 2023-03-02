@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
 import 'package:phantom_connect/phantom_connect.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class CreateContactScreen extends StatefulWidget {
   final PhantomConnect phantomConnectInstance;
@@ -26,6 +25,7 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
     super.initState();
   }
 
+  // ignore: body_might_complete_normally_nullable
   Future<DocumentReference<Object?>?> adduser(
       {required String name, required String pubKey}) async {
     await users
@@ -70,6 +70,7 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
                           message: "Please submit required fields",
                           title: "Error");
                     }
+                    return null;
                   },
                   style: TextStyle(
                       color: Colors.white,
@@ -99,6 +100,7 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
                           message: "Please submit required fields",
                           title: "Error");
                     }
+                    return null;
                   },
                   style: TextStyle(
                       color: Colors.white,
@@ -129,9 +131,8 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
                         pubKey: pubkeyController.text);
                   },
                   style: ElevatedButton.styleFrom(
-                      minimumSize: Size(screenWidth(context), 50),
-                      elevation: 4,
-                      primary: Colors.white),
+                      minimumSize: Size(screenWidth(context), 50), backgroundColor: Colors.white,
+                      elevation: 4),
                   child: Text(
                     "Save",
                     style: TextStyle(color: Colors.black),
