@@ -1,3 +1,4 @@
+import 'package:Sol_Swap/components/screens/sign_and_send_transaction/sign_and_send_tx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Sol_Swap/resources/ui_helpers.dart';
@@ -33,7 +34,12 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
           'name': name,
           'pubKey': pubKey,
         })
-        .then((documentReference) {})
+        .then((documentReference) {
+          print(documentReference.id);
+          showInfoMessage(
+              message: "Contact added successfully", title: "Success");
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignAndSendTransactionScreen(phantomConnectInstance: widget.phantomConnectInstance)), (route) => false);
+        })
         .catchError((e) {
           print("My Error is $e");
         });
@@ -57,87 +63,89 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Form(
           key: _formkey,
-          child: Column(
-            children: [
-              vSpaceMedium,
-              TextFormField(
-                  controller: pubkeyController,
-                  validator: (value) {
-                    if (value!.isNotEmpty) {
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                vSpaceMedium,
+                TextFormField(
+                    controller: pubkeyController,
+                    validator: (value) {
+                      if (value!.isNotEmpty) {
+                        return null;
+                      } else {
+                        showInfoMessage(
+                            message: "Please submit required fields",
+                            title: "Error");
+                      }
                       return null;
-                    } else {
-                      showInfoMessage(
-                          message: "Please submit required fields",
-                          title: "Error");
-                    }
-                    return null;
-                  },
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                  decoration: InputDecoration(
-                    labelText: "Enter PubKey to add in contact",
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 0.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 0.0),
-                    ),
-                    labelStyle: TextStyle(
+                    },
+                    style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
-                        fontWeight: FontWeight.normal),
-                  )),
-              vSpaceMedium,
-              TextFormField(
-                  controller: nameController,
-                  validator: (value) {
-                    if (value!.isNotEmpty) {
+                        fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                      labelText: "Enter PubKey to add in contact",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal),
+                    )),
+                vSpaceMedium,
+                TextFormField(
+                    controller: nameController,
+                    validator: (value) {
+                      if (value!.isNotEmpty) {
+                        return null;
+                      } else {
+                        showInfoMessage(
+                            message: "Please submit required fields",
+                            title: "Error");
+                      }
                       return null;
-                    } else {
-                      showInfoMessage(
-                          message: "Please submit required fields",
-                          title: "Error");
-                    }
-                    return null;
-                  },
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                  decoration: InputDecoration(
-                    labelText: "Enter Name",
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 0.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 0.0),
-                    ),
-                    labelStyle: TextStyle(
+                    },
+                    style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
-                        fontWeight: FontWeight.normal),
-                  )),
-              vSpaceLarge,
-              vSpaceLarge,
-              vSpaceLarge,
-              vSpaceLarge,
-              vSpaceLarge,
-              ElevatedButton(
-                  onPressed: () {
-                    adduser(
-                        name: nameController.text,
-                        pubKey: pubkeyController.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(screenWidth(context), 50), backgroundColor: Colors.white,
-                      elevation: 4),
-                  child: Text(
-                    "Save",
-                    style: TextStyle(color: Colors.black),
-                  ))
-            ],
+                        fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                      labelText: "Enter Name",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal),
+                    )),
+                vSpaceLarge,
+                vSpaceLarge,
+                vSpaceLarge,
+                vSpaceLarge,
+                vSpaceLarge,
+                ElevatedButton(
+                    onPressed: () {
+                      adduser(
+                          name: nameController.text,
+                          pubKey: pubkeyController.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: Size(screenWidth(context), 50), backgroundColor: Colors.white,
+                        elevation: 4),
+                    child: Text(
+                      "Save",
+                      style: TextStyle(color: Colors.black),
+                    ))
+              ],
+            ),
           ),
         ),
       ),

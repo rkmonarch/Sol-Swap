@@ -1,0 +1,31 @@
+declare const _default: {
+    readonly name: "OctaSpace";
+    readonly chain: "OCTA";
+    readonly rpc: readonly ["https://octaspace.rpc.thirdweb.com/${THIRDWEB_API_KEY}", "https://rpc.octa.space", "wss://rpc.octa.space"];
+    readonly faucets: readonly [];
+    readonly nativeCurrency: {
+        readonly name: "OctaSpace";
+        readonly symbol: "OCTA";
+        readonly decimals: 18;
+    };
+    readonly infoURL: "https://octa.space";
+    readonly shortName: "octa";
+    readonly chainId: 800001;
+    readonly networkId: 800001;
+    readonly icon: {
+        readonly url: "ipfs://QmVhezQHkqSZ5Tvtsw18giA1yBjV1URSsBQ7HenUh6p6oC";
+        readonly width: 512;
+        readonly height: 512;
+        readonly format: "png";
+    };
+    readonly explorers: readonly [{
+        readonly name: "blockscout";
+        readonly url: "https://explorer.octa.space";
+        readonly icon: "blockscout";
+        readonly standard: "EIP3091";
+    }];
+    readonly testnet: false;
+    readonly slug: "octaspace";
+};
+export default _default;
+//# sourceMappingURL=800001.d.ts.map

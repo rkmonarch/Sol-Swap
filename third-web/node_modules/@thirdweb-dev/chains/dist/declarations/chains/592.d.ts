@@ -1,0 +1,31 @@
+declare const _default: {
+    readonly name: "Astar";
+    readonly chain: "ASTR";
+    readonly rpc: readonly ["https://astar.rpc.thirdweb.com/${THIRDWEB_API_KEY}", "https://rpc.astar.network:8545"];
+    readonly faucets: readonly [];
+    readonly nativeCurrency: {
+        readonly name: "Astar";
+        readonly symbol: "ASTR";
+        readonly decimals: 18;
+    };
+    readonly infoURL: "https://astar.network/";
+    readonly shortName: "astr";
+    readonly chainId: 592;
+    readonly networkId: 592;
+    readonly icon: {
+        readonly url: "ipfs://Qmdvmx3p6gXBCLUMU1qivscaTNkT6h3URdhUTZCHLwKudg";
+        readonly width: 1000;
+        readonly height: 1000;
+        readonly format: "png";
+    };
+    readonly explorers: readonly [{
+        readonly name: "subscan";
+        readonly url: "https://astar.subscan.io";
+        readonly standard: "none";
+        readonly icon: "subscan";
+    }];
+    readonly testnet: false;
+    readonly slug: "astar";
+};
+export default _default;
+//# sourceMappingURL=592.d.ts.map

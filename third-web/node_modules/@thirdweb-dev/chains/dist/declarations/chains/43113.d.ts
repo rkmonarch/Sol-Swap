@@ -1,0 +1,31 @@
+declare const _default: {
+    readonly name: "Avalanche Fuji Testnet";
+    readonly chain: "AVAX";
+    readonly icon: {
+        readonly url: "ipfs://QmcxZHpyJa8T4i63xqjPYrZ6tKrt55tZJpbXcjSDKuKaf9/avalanche/512.png";
+        readonly height: 512;
+        readonly width: 512;
+        readonly format: "png";
+        readonly sizes: readonly [512, 256, 128, 64, 32, 16];
+    };
+    readonly rpc: readonly ["https://avalanche-fuji.rpc.thirdweb.com/${THIRDWEB_API_KEY}", "https://avalanche-fuji.infura.io/v3/${INFURA_API_KEY}", "https://api.avax-test.network/ext/bc/C/rpc"];
+    readonly faucets: readonly ["https://faucet.avax-test.network/"];
+    readonly nativeCurrency: {
+        readonly name: "Avalanche";
+        readonly symbol: "AVAX";
+        readonly decimals: 18;
+    };
+    readonly infoURL: "https://cchain.explorer.avax-test.network";
+    readonly shortName: "Fuji";
+    readonly chainId: 43113;
+    readonly networkId: 1;
+    readonly explorers: readonly [{
+        readonly name: "snowtrace";
+        readonly url: "https://testnet.snowtrace.io";
+        readonly standard: "EIP3091";
+    }];
+    readonly testnet: true;
+    readonly slug: "avalanche-fuji";
+};
+export default _default;
+//# sourceMappingURL=43113.d.ts.map

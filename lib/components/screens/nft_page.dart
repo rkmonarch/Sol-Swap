@@ -19,8 +19,7 @@ class _NFTState extends State<NFT> {
   var data;
   @override
   void initState() {
-    BlocProvider.of<NftBloc>(context)
-        .add(GetNFTEvent(NFTAddress: widget.nft_address));
+   
     super.initState();
   }
 
@@ -44,23 +43,14 @@ class _NFTState extends State<NFT> {
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: BlocBuilder<NftBloc, NftState>(
-          builder: (context, state) {
-            if (state is NFTLoading) {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              );
-            } else if (state is NFTSuccess) {
-              var data = state.model.metadata;
-              return Padding(
+        body: 
+        Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data?.name.toString() ?? "",
+                       "Reward NFT",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -75,7 +65,7 @@ class _NFTState extends State<NFT> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           image: DecorationImage(
-                            image: NetworkImage(data?.image.toString() ?? ""),
+                            image: NetworkImage("https://bafkreigfbgrconpiypingqjps5zd4kxoqawqpijandvju347gsqnyvisci.ipfs.nftstorage.link/"),
                           )),
                     ),
                     SizedBox(
@@ -92,7 +82,7 @@ class _NFTState extends State<NFT> {
                       height: 10,
                     ),
                     Text(
-                      data?.description.toString() ?? "",
+                       "This is the reward NFT to you for making transactions on Sol Swap applicatio enjoy:)",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.normal,
@@ -103,11 +93,7 @@ class _NFTState extends State<NFT> {
                     ),
                   ],
                 ),
-              );
-            }
-            return Container();
-          },
-        ),
+              )
       ),
     );
   }

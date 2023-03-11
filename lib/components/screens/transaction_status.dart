@@ -109,16 +109,17 @@ class _TransactionStatusState extends State<TransactionStatus> {
                             backgroundColor: Colors.green,
                           ),
                           onPressed: () async {
-                            claimNFT(walletAddress: wallet).then((value) {
-                              if (value.claimedAddresses != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => NFT(
-                                            nft_address: value.claimedAddresses
-                                                .toString())));
-                              }
-                            });
+                            // claimNFT(walletAddress: wallet).then((value) {
+                            //   if (value.claimedAddresses != null) {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => NFT(
+                            //                 nft_address: value.claimedAddresses
+                            //                     .toString())));
+                            //   }
+                            // });
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> NFT(nft_address: "")), (route) => false);
                           },
                           child: Text("Check Rewards")),
                     ],

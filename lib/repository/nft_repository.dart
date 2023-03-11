@@ -6,7 +6,7 @@ import 'package:Sol_Swap/models/nft.dart';
 import 'package:Sol_Swap/utils/logger.dart';
 import 'package:http/http.dart' as http;
 
-const String url = 'http://192.168.0.104:3200/';
+const String url = 'http://192.168.0.102:3000/';
 
 Future<claim_model> claimNFT({required String walletAddress}) async {
   log(walletAddress);

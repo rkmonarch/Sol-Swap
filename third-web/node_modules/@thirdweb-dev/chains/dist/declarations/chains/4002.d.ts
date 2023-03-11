@@ -1,0 +1,32 @@
+declare const _default: {
+    readonly name: "Fantom Testnet";
+    readonly chain: "FTM";
+    readonly rpc: readonly ["https://fantom-testnet.rpc.thirdweb.com/${THIRDWEB_API_KEY}", "https://rpc.testnet.fantom.network"];
+    readonly faucets: readonly ["https://faucet.fantom.network"];
+    readonly nativeCurrency: {
+        readonly name: "Fantom";
+        readonly symbol: "FTM";
+        readonly decimals: 18;
+    };
+    readonly infoURL: "https://docs.fantom.foundation/quick-start/short-guide#fantom-testnet";
+    readonly shortName: "tftm";
+    readonly chainId: 4002;
+    readonly networkId: 4002;
+    readonly icon: {
+        readonly url: "ipfs://QmcxZHpyJa8T4i63xqjPYrZ6tKrt55tZJpbXcjSDKuKaf9/fantom/512.png";
+        readonly height: 512;
+        readonly width: 512;
+        readonly format: "png";
+        readonly sizes: readonly [512, 256, 128, 64, 32, 16];
+    };
+    readonly explorers: readonly [{
+        readonly name: "ftmscan";
+        readonly url: "https://testnet.ftmscan.com";
+        readonly icon: "ftmscan";
+        readonly standard: "EIP3091";
+    }];
+    readonly testnet: true;
+    readonly slug: "fantom-testnet";
+};
+export default _default;
+//# sourceMappingURL=4002.d.ts.map

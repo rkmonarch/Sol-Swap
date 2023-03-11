@@ -50,7 +50,7 @@ showInfoMessage({required message, title}) {
   Get.snackbar(
     title,
     message,
-    backgroundColor: title == "Info" ? Colors.green : Colors.red,
+    backgroundColor: Colors.green,
     colorText: Colors.white,
     shouldIconPulse: true,
     snackPosition: SnackPosition.TOP,
