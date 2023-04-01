@@ -6,11 +6,7 @@ So, to overcome this I have made this mobile application which offers solution f
 
 ## Demo
 <p float="left">
-  <img src="images/splash.png" width="300"  alt="App Demo">
-<img src="images/home.jpeg" width="300"  alt="App Demo">
-
-   <img src="images/send_transaction.jpeg" width="300"  alt="App Demo">
-<img src="images/status.jpeg" width="300"  alt="App Demo">
+  <img src="images/sol-swap.png"  alt="App Demo">
 
 </p>
 
